@@ -1,416 +1,70 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Happy Mensiversary ke-28 ❤️</title>
-<style>
-/* ——— BASIC STYLE —————————————— */
-* { box-sizing: border-box; }
-body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #ffefef 0%, #ffe6f0 50%, #fff8fb 100%);
-    min-height: 100vh;
-}
-
-/* center page */
-.page { text-align: center; padding: 40px 20px; }
-
-/* heading */
-h1 {
-    color: #ff2f6d;
-    font-size: 36px;
-    margin: 6px 0 12px;
-    text-shadow: 0 6px 18px rgba(255,64,112,0.15);
-}
-
-/* prompt */
-.ask-text {
-    font-size: 18px;
-    color: #ff5b88;
-    margin-bottom: 18px;
-}
-
-/* ——— ENVELOPE —————————————— */
-.envelope-container {
-    position: relative;
-    width: 340px;
+/* ——— AMBLOP STYLE BARU & ANIMASI PREMIUM —————————————— */
+.envelope-wrapper {
+    width: 320px;
     height: 240px;
-    margin: 12px auto;
-    perspective: 900px; /* allow 3D flip */
-    z-index: 6;
+    margin: 0 auto;
+    position: relative;
+    perspective: 1200px;
 }
 
-/* body of envelope */
+.envelope {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
 .envelope-body {
     width: 100%;
-    height: 170px;
-    background: linear-gradient(180deg,#fff #ffeef6);
-    border-radius: 14px;
+    height: 180px;
+    background: white;
+    border-radius: 0 0 15px 15px;
     position: absolute;
     bottom: 0;
-    left: 0;
-    box-shadow: 0 10px 30px rgba(255,80,140,0.18), inset 0 -6px 18px rgba(255,200,220,0.5);
-    overflow: hidden;
-    border: 1px solid rgba(255,70,120,0.06);
+    z-index: 2;
+    box-shadow: 0 15px 35px rgba(255, 80, 140, 0.25);
 }
 
-/* flap: centered triangle */
+/* Flap / segitiga atas */
 .envelope-flap {
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 170px solid transparent;
-    border-right: 170px solid transparent;
-    border-bottom: 120px solid #ff5c8a;
-    transform-origin: bottom center; /* rotate around bottom edge */
-    box-shadow: 0 10px 30px rgba(255,80,140,0.12);
-    transition: transform 0.9s cubic-bezier(.2,.9,.3,1);
-    z-index: 8;
-    backface-visibility: hidden;
-}
-
-/* flap open (flip up) */
-.envelope-container.open .envelope-flap {
-    transform: translateX(-50%) rotateX(-180deg) translateY(-10px);
-}
-
-/* letter paper (initial hidden below) */
-.letter-paper {
-    width: 84%;
-    max-width: 300px;
-    height: 150px;
-    background: linear-gradient(180deg,#fffafc,#fff0f6);
-    border-radius: 8px;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-bottom: 110px solid #ff5c8a;
     position: absolute;
-    left: 8%;
-    bottom: 12px;
-    box-shadow: 0 12px 30px rgba(255,60,120,0.14);
-    transform: translateY(120px) rotateX(12deg);
+    top: 0;
+    left: 0;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    z-index: 5;
+    transition: transform 1s cubic-bezier(.25,.46,.45,1.4);
+}
+
+/* FLAP open (3D flip) */
+.envelope-flap.open {
+    transform: rotateX(180deg);
+}
+
+/* SURAT / KERTAS */
+.letter-paper {
+    width: 85%;
+    height: 150px;
+    background: #fff7fb;
+    border-radius: 10px;
+    position: absolute;
+    left: 7.5%;
+    bottom: 20px;
+    box-shadow: 0 10px 25px rgba(255, 80, 140, 0.35);
+    transform: translateY(95px);
     opacity: 0;
-    z-index: 7;
-    /* we'll animate via keyframes when .open */
-}
-
-/* keyframes for paper - smooth lift with small overshoot */
-@keyframes paperLift {
-    0% { transform: translateY(120px) rotateX(12deg); opacity: 0; }
-    50% { transform: translateY(-30px) rotateX(4deg); opacity: 1; }
-    75% { transform: translateY(-10px) rotateX(0deg); }
-    100% { transform: translateY(-18px) rotateX(0deg); }
-}
-
-/* when envelope is open, run animation */
-.envelope-container.open .letter-paper {
-    animation: paperLift 0.9s cubic-bezier(.22,.9,.35,1) forwards;
-}
-
-/* inner content area for the revealed letter (invisible until page switch) */
-.letter-inside {
-    padding: 16px;
-    color: #c22a5a;
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-/* ——— BUTTONS —————————————— */
-.btn-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    height: 260px;
-    margin: 6px auto 0;
-}
-.btn {
-    padding: 12px 24px;
-    border: none;
-    background: #ff3e7f;
-    color: white;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform .15s;
-    box-shadow: 0 8px 18px rgba(255,60,120,0.18);
-}
-.btn:hover { transform: translateY(-3px); }
-
-#yesBtn { position: absolute; left: 26%; top: 110px; }
-#noBtn  { position: absolute; left: 56%; top: 110px; }
-
-/* ——— LETTER PAGE —————————————— */
-.letter-page {
-    display: none;
-    padding-top: 6px;
-}
-.photos {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 6px;
-}
-.photos img {
-    width: 220px;
-    border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(255,80,130,0.15);
-}
-
-/* love letter block */
-.love-letter {
-    width: 86%;
-    max-width: 640px;
-    margin: 22px auto;
-    padding: 20px 22px;
-    background: linear-gradient(180deg,#fffafc,#fff0f6);
-    border-radius: 16px;
-    box-shadow: 0 18px 40px rgba(255,80,130,0.08);
-    color: #c22a5a;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-/* ——— DECORATIONS —————————————— */
-.sparkle {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
-    animation: sparkle 2.2s infinite ease-in-out;
-    opacity: 0.9;
-    z-index: 2;
-}
-@keyframes sparkle {
-    0% { transform: scale(0.3); opacity: 0.3; }
-    50%{ transform: scale(1.4); opacity: 1; }
-    100%{ transform: scale(0.3); opacity: 0.3; }
-}
-
-.heart {
-    position: fixed;
-    color: #ff4d6d;
-    font-size: 20px;
-    animation: fall 4.2s linear infinite;
     z-index: 1;
-}
-@keyframes fall {
-    0%{ transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-    100%{ transform: translateY(110vh) rotate(25deg); opacity: 0; }
-}
-
-/* marquee (teks berjalan) */
-.marquee {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-    border-top: 1px dashed rgba(255,70,120,0.07);
-    border-bottom: 1px dashed rgba(255,70,120,0.07);
-    padding: 8px 0;
-    margin-top: 16px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
-}
-.marquee span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marqueeAnim 18s linear infinite;
-    color: #ff2f6d;
-    font-weight: 600;
-}
-@keyframes marqueeAnim {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
+    transition: 
+        transform 1.1s cubic-bezier(.22,1.22,.27,1.01),
+        opacity .7s ease-in-out;
 }
 
-/* responsive */
-@media (max-width:420px){
-    .envelope-container { width: 300px; height: 220px; }
-    .envelope-flap { border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 110px solid #ff5c8a; }
-    .letter-paper { width: 86%; left: 7%; }
-    .photos img { width: 160px; }
-    h1 { font-size: 28px; }
+/* Kertas keluar smooth + bounce */
+.letter-paper.show {
+    transform: translateY(-10px);
+    opacity: 1;
 }
-</style>
-</head>
-<body>
-
-<div class="page" id="coverPage" aria-live="polite">
-    <h1>Happy Mensiversary ke-28 ❤️</h1>
-    <div class="ask-text">Mau lihat isi suratnya? 💌</div>
-
-    <!-- envelope -->
-    <div class="envelope-container" id="env">
-        <div class="envelope-flap" id="flap" aria-hidden="true"></div>
-        <div class="envelope-body" aria-hidden="true"></div>
-
-        <!-- the paper that will rise up -->
-        <div class="letter-paper" id="paper" aria-hidden="true">
-            <!-- content preview (optional small lines) -->
-            <div style="padding:12px;">
-                <div style="height:10px;width:80%;background:#ffe8f0;border-radius:6px;margin:6px 0;"></div>
-                <div style="height:10px;width:60%;background:#ffe8f0;border-radius:6px;margin:6px 0;"></div>
-                <div style="height:10px;width:70%;background:#ffe8f0;border-radius:6px;margin:6px 0;"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- buttons area -->
-    <div class="btn-wrap">
-        <button class="btn" id="yesBtn" onclick="openEnvelope()">Iya ❤️</button>
-        <button class="btn" id="noBtn">Tidak 🙅</button>
-    </div>
-
-    <!-- marquee / running text -->
-    <div class="marquee" aria-hidden="true"><span>Selamat mensiversary ke-28 • Aku sayang kamu • Terima kasih sudah selalu ada • Cinta kita selamanya •</span></div>
-</div>
-
-<!-- letter page (hidden until opened) -->
-<div class="letter-page" id="letterPage" aria-hidden="true">
-    <h1>Untuk Kamu yang Aku Cintai ❤️</h1>
-
-    <div class="photos" aria-hidden="true">
-        <!-- GANTI LINK DENGAN FOTO KALIAN -->
-        <img src="foto-kita.jpg" alt="Foto kita 1">
-        <img src="foto-kita2.jpg" alt="Foto kita 2">
-    </div>
-
-    <div class="love-letter" role="article">
-        Sayangku…<br><br>
-        Hari ini Mensiversary kita yang ke-28. Terima kasih sudah memilih aku setiap hari,  
-        untuk tawa, pelukan, lelah dan bahagia. Kamu rumah terbaik di hatiku.  
-        Semoga kita selalu saling merawat cinta ini, tumbuh dan menjadi lebih baik.  
-        Aku mencintaimu — sekarang, esok, dan selamanya. ❤️
-    </div>
-</div>
-
-<!-- audio (autoplay policy: play on first interaction or via script) -->
-<audio id="bgm" loop preload="auto">
-    <!-- GANTI LAGU.Dengan link mp3 bebas hak cipta atau file lokal -->
-    <source src="lagu.mp3" type="audio/mpeg">
-</audio>
-<audio id="popup" preload="auto">
-    <source src="popup.mp3" type="audio/mpeg">
-</audio>
-
-<!-- decorative sparkles and hearts appended via script -->
-
-<script>
-/* -----------------------
-   Interaction & Animations
-   ----------------------- */
-const env = document.getElementById('env');
-const flap = document.getElementById('flap');
-const paper = document.getElementById('paper');
-const coverPage = document.getElementById('coverPage');
-const letterPage = document.getElementById('letterPage');
-const bgm = document.getElementById('bgm');
-const popup = document.getElementById('popup');
-const noBtn = document.getElementById('noBtn');
-const yesBtn = document.getElementById('yesBtn');
-
-/* Try to autoplay muted then unmute (best-effort) */
-window.addEventListener('load', () => {
-    try {
-        bgm.volume = 0;
-        const p = bgm.play();
-        if (p && p.then) {
-            p.then(()=> {
-                setTimeout(()=> bgm.volume = 0.9, 900);
-            }).catch(()=> {
-                // blocked: will play after user click (openEnvelope)
-            });
-        }
-    } catch(e){}
-});
-
-/* open envelope: flap flip + paper lift */
-function openEnvelope() {
-    // add open class to envelope container
-    env.classList.add('open');
-
-    // play small popup sound and ensure bgm playing
-    try { popup.currentTime = 0; popup.play(); } catch(e){}
-    try { bgm.play(); } catch(e){}
-
-    // after short delay, show the letter page (keeps dramatic timing)
-    setTimeout(()=> {
-        // hide cover, show letter page
-        coverPage.style.display = 'none';
-        letterPage.style.display = 'block';
-        // accessibility
-        coverPage.setAttribute('aria-hidden','true');
-        letterPage.setAttribute('aria-hidden','false');
-    }, 950); // timing tuned with animations
-}
-
-/* no button silly move */
-(function(){
-    const wrap = document.querySelector('.btn-wrap');
-    function moveNo() {
-        const r = wrap.getBoundingClientRect();
-        const w = noBtn.offsetWidth, h = noBtn.offsetHeight;
-        const maxLeft = r.width - w - 10;
-        const maxTop = r.height - h - 10;
-        let left = Math.random()*maxLeft;
-        let top = Math.random()*maxTop;
-        noBtn.style.left = left + 'px';
-        noBtn.style.top = top + 'px';
-    }
-    noBtn.addEventListener('mouseenter', moveNo);
-    noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); moveNo(); });
-    noBtn.addEventListener('click', e=>{ e.preventDefault(); moveNo(); });
-})();
-
-/* -----------------------
-   Decorative Sparkles
-   ----------------------- */
-(function createSparkles(){
-    for(let i=0;i<28;i++){
-        const s = document.createElement('div');
-        s.className = 'sparkle';
-        s.style.left = (Math.random()*100) + 'vw';
-        s.style.top = (Math.random()*100) + 'vh';
-        s.style.width = (4 + Math.random()*6) + 'px';
-        s.style.height = s.style.width;
-        s.style.animationDelay = (Math.random()*2) + 's';
-        document.body.appendChild(s);
-    }
-})();
-
-/* -----------------------
-   Heart Particles
-   ----------------------- */
-(function hearts(){
-    function makeHeart(){
-        const h = document.createElement('div');
-        h.className = 'heart';
-        h.innerHTML = '❤️';
-        h.style.left = Math.random()*100 + 'vw';
-        h.style.fontSize = (14 + Math.random()*28) + 'px';
-        h.style.animationDuration = (3.5 + Math.random()*2.5) + 's';
-        document.body.appendChild(h);
-        setTimeout(()=> h.remove(), 4200);
-    }
-    setInterval(makeHeart, 350);
-})();
-
-/* -----------------------
-   Confetti (via CDN) - load once
-   ----------------------- */
-(function(){
-    const script = document.createElement('script');
-    script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1";
-    script.onload = ()=> {
-        // subtle confetti bursts every few seconds
-        setInterval(()=> confetti({ particleCount: 40, spread: 60, origin: { y: 0.1 }}), 2500);
-    };
-    document.body.appendChild(script);
-})();
-</script>
-</body>
-</html>
