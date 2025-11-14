@@ -10,7 +10,48 @@
             font-family: "Poppins", sans-serif;
             background: #ffe6f2;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+
+        .page {
+            display: none;
+            padding: 25px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* HALAMAN AWAL */
+        .cover-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cover-letter {
+            width: 230px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
+        }
+
+        .btn-area {
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            background: #d63384;
+            color: white;
+            border-radius: 10px;
+            margin: 5px;
+            cursor: pointer;
         }
 
         /* KERTAS SURAT */
@@ -33,7 +74,7 @@
             color: #d63384;
         }
 
-        /* BALASAN SURAT */
+        /* BALAS SURAT */
         .reply-box {
             margin-top: 20px;
             padding: 20px;
@@ -65,8 +106,8 @@
             cursor: pointer;
         }
 
-        .saved-reply {
-            margin-top: 15px;
+        .hidden-section {
+            margin-top: 20px;
             padding: 15px;
             background: #fff8fd;
             border-left: 4px solid #d63384;
@@ -77,63 +118,87 @@
 </head>
 <body>
 
-    <!-- KERTAS SURAT -->
-    <div class="paper">
-        <h2>Surat Cinta Untukmu ❤️</h2>
+    <!-- ========== HALAMAN AWAL ========== -->
+    <div id="page1" class="page active">
+        <div class="cover-container">
+            <img src="surat.jpg" class="cover-letter">
+            <h1>Happy Mensiversary ke-28 ❤️</h1>
+            <p>Mau baca surat spesial dariku? 💌</p>
 
-        <!-- ✏️ GANTI ISI SURAT DI SINI -->
-        <p id="mainLetter">
-            Sayangku, terima kasih sudah menemani perjalanan cinta kita hingga hari ini.  
-            Kamu adalah alasan aku belajar menjadi lebih baik setiap hari.  
-            Semoga hubungan kita selalu penuh cinta, tawa, dan kebahagiaan.  
-            Selamat Mensiversary ke-28, cintaku ❤️
-        </p>
-        <!-- ✏️ END -->
-
-    </div>
-
-    <!-- FITUR BALAS SURAT -->
-    <div class="reply-box">
-        <h3>Balas Surat Ini ✉️</h3>
-        <textarea id="replyText" placeholder="Ketik balasanmu di sini..."></textarea>
-        <button onclick="saveReply()">Kirim Balasan</button>
-
-        <!-- Tempat menampilkan balasan -->
-        <div class="saved-reply" id="replyDisplay">
-            <h4>Balasan Darinya 💌:</h4>
-            <p id="replyContent"></p>
+            <div class="btn-area">
+                <button class="btn" onclick="openLetter()">Iya ❤️</button>
+                <button class="btn" onclick="noBtn()">Tidak 🙅</button>
+            </div>
         </div>
     </div>
 
-    <script>
-        // LOAD BALASAN JIKA SUDAH PERNAH DIKIRIM
-        window.onload = () => {
-            const saved = localStorage.getItem("balasanSurat");
-            if (saved) {
-                document.getElementById("replyDisplay").style.display = "block";
-                document.getElementById("replyContent").innerText = saved;
-            }
-        };
+    <!-- ========== HALAMAN SURAT ========== -->
+    <div id="page2" class="page">
 
-        // SIMPAN BALASAN
-        function saveReply() {
-            const text = document.getElementById("replyText").value.trim();
+        <div class="paper">
+            <h2>Surat Cinta Untukmu ❤️</h2>
 
-            if (text === "") {
-                alert("Balasan tidak boleh kosong.");
-                return;
-            }
+            <!-- EDIT ISI SURAT DI SINI -->
+            <p id="mainLetter">
+                Sayangku, terima kasih sudah setia mendampingi setiap langkahku.  
+                Kamu adalah penyemangatku, kebahagiaanku, dan rumah ternyaman bagiku.  
+                Selamat Mensiversary ke-28, cintaku. Semoga hubungan kita selalu hangat  
+                dan penuh kasih sayang seperti hari ini ❤️  
+            </p>
+            <!-- END -->
+        </div>
 
-            localStorage.setItem("balasanSurat", text);
+        <!-- FITUR BALASAN -->
+        <div class="reply-box">
+            <h3>Balas Surat Ini ✉️</h3>
+            <textarea id="replyText" placeholder="Ketik balasanmu di sini..."></textarea>
+            <button onclick="sendReply()">Kirim Balasan</button>
 
-            document.getElementById("replyContent").innerText = text;
-            document.getElementById("replyDisplay").style.display = "block";
+            <button onclick="readReply()">🔒 Lihat Balasan (Password)</button>
 
-            document.getElementById("replyText").value = "";
+            <div id="replySecret" class="hidden-section">
+                <h4>Balasan Darinya 💌:</h4>
+                <p id="savedReply"></p>
+            </div>
+        </div>
+    </div>
 
-            alert("Balasan berhasil dikirim!");
+<script>
+    /* PINDAH HALAMAN */
+    function openLetter() {
+        document.getElementById("page1").classList.remove("active");
+        document.getElementById("page2").classList.add("active");
+    }
+
+    function noBtn() {
+        alert("Yaah :'( tapi kamu tetap harus baca! 💗");
+    }
+
+    /* SIMPAN BALASAN */
+    function sendReply() {
+        let text = document.getElementById("replyText").value.trim();
+        if (text === "") return alert("Balasan tidak boleh kosong.");
+
+        localStorage.setItem("balasanSurat", text);
+        alert("Balasan berhasil dikirim ❤️");
+        document.getElementById("replyText").value = "";
+    }
+
+    /* LIHAT BALASAN TERPROTEKSI PASSWORD */
+    function readReply() {
+        let pwd = prompt("Masukkan password untuk membuka balasan:");
+
+        if (pwd === "140723") {
+            let reply = localStorage.getItem("balasanSurat");
+            if (!reply) reply = "(Belum ada balasan)";
+
+            document.getElementById("replySecret").style.display = "block";
+            document.getElementById("savedReply").innerText = reply;
+        } else {
+            alert("Password salah!");
         }
-    </script>
+    }
+</script>
 
 </body>
 </html>
