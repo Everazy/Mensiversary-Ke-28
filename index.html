@@ -7,9 +7,7 @@
 
 <style>
     /* RESET & BODY */
-    * {
-        box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body, html {
         margin: 0;
@@ -60,9 +58,7 @@
         transition: 0.3s;
     }
 
-    button:hover {
-        background: #ff6f9c;
-    }
+    button:hover { background: #ff6f9c; }
 
     /* Tombol awal sejajar */
     #buttonContainer {
@@ -72,9 +68,7 @@
         justify-content: center;
     }
 
-    #noBtn {
-        position: relative;
-    }
+    #noBtn { position: relative; }
 
     /* HALAMAN SURAT */
     #letterPage {
@@ -87,10 +81,7 @@
         box-sizing: border-box;
     }
 
-    #letterPage h2, #letterPage h3 {
-        margin: 15px 0;
-        word-wrap: break-word;
-    }
+    #letterPage h2, #letterPage h3 { margin: 15px 0; word-wrap: break-word; }
 
     .letter-box {
         width: 100%;
@@ -157,7 +148,6 @@
     /* ANIMASI FADE */
     .fadeOut { animation: fadeOut 0.7s forwards; }
     .fadeIn { animation: fadeIn 0.7s forwards; }
-
     @keyframes fadeOut { to { opacity: 0; } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -241,8 +231,15 @@ const noBtn  = document.getElementById('noBtn');
 const bgm = document.getElementById('bgm');
 const clickSound = document.getElementById('clickSound');
 
-/* AUTOPLAY FIX */
-document.body.addEventListener("click", () => bgm.play(), { once:true });
+/* AUTOPLAY MUSIK SAAT HALAMAN DIBUKA */
+window.addEventListener('load', () => {
+    bgm.muted = true;
+    bgm.play().then(() => {
+        bgm.muted = false;
+    }).catch(e => {
+        console.log("Autoplay gagal, klik layar untuk mulai musik");
+    });
+});
 
 function playClick() {
     clickSound.currentTime = 0;
