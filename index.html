@@ -72,8 +72,7 @@
         min-height: 250px;
         font-size: 18px;
         white-space: pre-line;
-
-        background-image: linear-gradient(to bottom, rgba(255,182,193,0.4) 1px, transparent 1px);
+        background-image: linear-gradient(to bottom, rgba(255,182,193,0.45) 1px, transparent 1px);
         background-size: 100% 32px;
     }
 
@@ -120,6 +119,7 @@
         pointer-events: none;
     }
 
+    /* Love jatuh */
     @keyframes loveFall {
         0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
         100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
@@ -140,7 +140,7 @@
     <div class="center">
         <h1>Mensiversary Ke-28 ❤️</h1>
         <p>Ada surat spesial untuk kamu...</p>
-        <img src="love-letter_1f48c.png" width="250" />
+        <img src="surat.png" width="250" />
     </div>
 
     <div class="button-row">
@@ -162,4 +162,93 @@ Tulis isi surat kamu di sini...
     <button onclick="sendReply()" style="margin-top:15px;">Kirim Balasan</button>
 
     <h3 style="margin-top:30px;">Baca Balasan (Password)</h3>
-    <input type="password" id="pw" placeholder="Masukkan password" styl
+    <input type="password" id="pw" placeholder="Masukkan password" style="padding:10px; border-radius:10px; border:1px solid #ff8fb1;">
+    <button onclick="openMessage()" style="margin-top:10px;">Buka</button>
+
+    <div class="hiddenMsg" id="replyDisplay"></div>
+</div>
+
+<script>
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+
+/* Tombol TIDAK bergerak, tapi tombol IYA tetap diam */
+noBtn.addEventListener('mouseover', moveNoBtn);
+noBtn.addEventListener('touchstart', moveNoBtn);
+
+function moveNoBtn() {
+    /* Ubah jadi absolute hanya setelah bergerak */
+    noBtn.style.position = "absolute";
+
+    let maxX = window.innerWidth - 140;
+    let maxY = window.innerHeight - 140;
+
+    let newX = Math.random() * maxX;
+    let newY = Math.random() * maxY;
+
+    noBtn.style.left = newX + 'px';
+    noBtn.style.top = newY + 'px';
+}
+
+/* Sparkle */
+function sparkleEffect(x, y) {
+    for (let i = 0; i < 8; i++) {
+        let s = document.createElement("div");
+        s.classList.add("sparkle");
+        s.style.left = (x + (Math.random()*40 - 20)) + "px";
+        s.style.top = (y + (Math.random()*40 - 20)) + "px";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 900);
+    }
+}
+
+/* Tombol IYA → fade ke halaman surat */
+yesBtn.addEventListener('click', (e) => {
+    sparkleEffect(e.clientX, e.clientY);
+
+    const startPage = document.getElementById('startPage');
+    const letterPage = document.getElementById('letterPage');
+
+    startPage.style.opacity = "0";
+
+    setTimeout(() => {
+        startPage.style.display = "none";
+        letterPage.style.display = "block";
+        setTimeout(() => letterPage.style.opacity = "1", 30);
+    }, 800);
+});
+
+/* Kirim balasan */
+function sendReply() {
+    const text = document.getElementById('replyInput').value;
+    localStorage.setItem('replyMessage', text);
+    alert('Balasan terkirim! ❤️');
+}
+
+/* Password baca balasan */
+function openMessage() {
+    const pw = document.getElementById('pw').value;
+    if (pw === "140723") {
+        const msg = localStorage.getItem('replyMessage') || "(Belum ada balasan)";
+        document.getElementById('replyDisplay').innerText = msg;
+        document.getElementById('replyDisplay').style.display = 'block';
+    } else {
+        alert('Password salah!');
+    }
+}
+
+/* Love fall */
+function createLove() {
+    const h = document.createElement("div");
+    h.classList.add("love");
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (18 + Math.random()*25) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+}
+setInterval(createLove, 400);
+</script>
+
+</body>
+</html>
