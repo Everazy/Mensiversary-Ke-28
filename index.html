@@ -1,228 +1,320 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Mensiversary ke-28 ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Mensiversary ke-28 ❤️</title>
 
-<style>
-body{
-    margin:0;
-    font-family:"Poppins",sans-serif;
-    overflow-x:hidden;
-    background:#ffb7d5;
-}
-.page{text-align:center;padding:40px 20px;display:none;}
-.active{display:block;}
-.gradient-bg{
-    position:fixed;width:100%;height:100%;
-    background:linear-gradient(135deg,#ff8fb1,#ffc8dd,#ffafcc);
-    z-index:-1;
-}
-h1{color:white;font-size:40px;margin-top:20px;text-shadow:0 0 10px #ff3e7f;}
-.ask-text{font-size:20px;color:white;margin:20px 0;text-shadow:0 0 8px #ff3e7f;}
+    <style>
+        body{
+            margin:0;
+            font-family:"Poppins",sans-serif;
+            overflow-x:hidden;
+            background:#ffb7d5;
+        }
 
-#suratImg{
-    width:320px;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,80,140,0.5);
-    transition:0.4s ease;
-}
-.shake{animation:shakeAnim 0.6s ease;}
-@keyframes shakeAnim{
-    0%{transform:rotate(1deg);} 
-    20%{transform:rotate(-2deg);} 
-    40%{transform:rotate(2deg);} 
-    60%{transform:rotate(-2deg);} 
-    80%{transform:rotate(1.5deg);} 
-    100%{transform:rotate(0deg);} }
+        .page{
+            text-align:center;
+            padding:40px 20px;
+            display:none;
+        }
+        .active{ display:block; }
 
-/* tombol dasar (digunakan untuk Iya, Tidak, Kirim, Lihat) */
-.btn{
-    padding:12px 25px;
-    border:none;
-    background:linear-gradient(135deg,#ff5a98,#d63384);
-    color:white;
-    border-radius:12px;
-    font-size:18px;
-    cursor:pointer;
-    box-shadow:0 6px 18px rgba(214,51,132,0.18);
-    transition:transform .15s ease, box-shadow .15s ease;
-}
-.btn:active{transform:translateY(2px)}
+        .gradient-bg{
+            position:fixed;
+            width:100%;
+            height:100%;
+            background:linear-gradient(135deg,#ff8fb1,#ffc8dd,#ffafcc);
+            z-index:-1;
+        }
 
-#noBtn{
-    position:absolute;
-    transition:transform .2s ease;
-}
+        h1{
+            color:white;
+            font-size:40px;
+            margin-top:20px;
+            text-shadow:0 0 10px #ff3e7f;
+        }
 
-.btn-pretty{
-    width:100%;
-    margin-top:12px;
-    padding:14px;
-    border:none;
-    border-radius:15px;
-    font-size:17px;
-    color:white;
-    cursor:pointer;
-    background:linear-gradient(135deg,#ff4d8d,#ff77b4);
-    box-shadow:0 4px 12px rgba(255,0,100,0.3);
-    transition:0.3s;
-}
-.btn-pretty:hover{transform:scale(1.05);box-shadow:0 6px 18px rgba(255,0,140,0.5)}
+        .ask-text{
+            font-size:20px;
+            color:white;
+            margin:20px 0;
+            text-shadow:0 0 8px #ff3e7f;
+        }
 
-/* gaya kertas untuk area balasan agar terlihat seperti kotak surat */
-.reply-box{
-    margin-top:20px;
-    padding:22px;
-    background:linear-gradient(180deg,#fffafc,#fff0f6);
-    border-radius:14px;
-    box-shadow:0 12px 30px rgba(255,60,120,0.12);
-    border:1px solid rgba(255,200,220,0.6);
-}
-textarea{width:100%;height:130px;padding:12px;font-size:15px;border-radius:10px;border:1px solid #e6cbd6;resize:none;outline:none;background:#fffdfd}
-.hidden-section{display:none;background:#fff8fd;padding:15px;border-left:4px solid #d63384;border-radius:10px;margin-top:20px;}
+        #suratImg{
+            width:320px;
+            border-radius:20px;
+            box-shadow:0 0 20px rgba(255,80,140,0.5);
+            transition:0.4s ease;
+        }
 
-.paper{width:90%;max-width:500px;margin:40px auto;background:#fffef6;padding:25px;border-radius:12px;box-shadow:0 0 15px rgba(0,0,0,0.2);border:1px solid #f3e1b6;background-image:linear-gradient(to bottom, transparent 97%, #ffdede 97%);background-size:100% 35px}
-.paper h2{text-align:center;color:#d63384}
+        .shake{ animation:shakeAnim 0.6s ease; }
 
-.sparkle{position:fixed;width:4px;height:4px;background:white;border-radius:50%;animation:sparkle 2s infinite ease-in-out;opacity:.7}
-@keyframes sparkle{0%{transform:scale(.2);opacity:.4}50%{transform:scale(1.2);opacity:1}100%{transform:scale(.2);opacity:.4}}
+        @keyframes shakeAnim{
+            0%{transform:rotate(1deg);}
+            20%{transform:rotate(-2deg);}
+            40%{transform:rotate(2deg);}
+            60%{transform:rotate(-2deg);}
+            80%{transform:rotate(1.5deg);}
+            100%{transform:rotate(0deg);}
+        }
 
-.heart{position:fixed;color:#ff4d6d;animation:fall 4s linear infinite}
-@keyframes fall{0%{transform:translateY(-10vh);opacity:1}100%{transform:translateY(110vh);opacity:0}}
+        /* Tombol */
+        .btn{
+            padding:12px 25px;
+            border:none;
+            background:linear-gradient(135deg,#ff5a98,#d63384);
+            color:white;
+            border-radius:12px;
+            font-size:18px;
+            cursor:pointer;
+            box-shadow:0 6px 18px rgba(214,51,132,0.18);
+            transition:transform .15s ease, box-shadow .15s ease;
+        }
+        .btn:active{ transform:translateY(2px); }
 
-/* halaman fade */
-.fade-out{animation:fadeOut .8s forwards}
-@keyframes fadeOut{to{opacity:0;transform:scale(1.03)}}
-.fade-in{animation:fadeIn .8s forwards}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        #noBtn{
+            position:absolute;
+            transition:transform .2s ease;
+        }
 
-/* responsive */
-@media (max-width:420px){#suratImg{width:260px}}
-</style>
+        .reply-box{
+            margin-top:20px;
+            padding:22px;
+            background:linear-gradient(180deg,#fffafc,#fff0f6);
+            border-radius:14px;
+            box-shadow:0 12px 30px rgba(255,60,120,0.12);
+            border:1px solid rgba(255,200,220,0.6);
+        }
+
+        textarea{
+            width:100%;
+            height:130px;
+            padding:12px;
+            font-size:15px;
+            border-radius:10px;
+            border:1px solid #e6cbd6;
+            resize:none;
+            outline:none;
+            background:#fffdfd;
+        }
+
+        .hidden-section{
+            display:none;
+            background:#fff8fd;
+            padding:15px;
+            border-left:4px solid #d63384;
+            border-radius:10px;
+            margin-top:20px;
+        }
+
+        .paper{
+            width:90%;
+            max-width:500px;
+            margin:40px auto;
+            background:#fffef6;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 0 15px rgba(0,0,0,0.2);
+            border:1px solid #f3e1b6;
+            background-image:linear-gradient(to bottom, transparent 97%, #ffdede 97%);
+            background-size:100% 35px;
+        }
+
+        .paper h2{
+            text-align:center;
+            color:#d63384;
+        }
+
+        .sparkle{
+            position:fixed;
+            width:4px;
+            height:4px;
+            background:white;
+            border-radius:50%;
+            animation:sparkle 2s infinite ease-in-out;
+            opacity:.7;
+        }
+
+        @keyframes sparkle{
+            0%{transform:scale(.2);opacity:.4}
+            50%{transform:scale(1.2);opacity:1}
+            100%{transform:scale(.2);opacity:.4}
+        }
+
+        .heart{
+            position:fixed;
+            color:#ff4d6d;
+            animation:fall 4s linear infinite;
+        }
+
+        @keyframes fall{
+            0%{transform:translateY(-10vh);opacity:1}
+            100%{transform:translateY(110vh);opacity:0}
+        }
+
+        /* halaman fade */
+        .fade-out{ animation:fadeOut .8s forwards; }
+        @keyframes fadeOut{ to{opacity:0;transform:scale(1.03);} }
+
+        .fade-in{ animation:fadeIn .8s forwards; }
+        @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+        @media (max-width:420px){
+            #suratImg{ width:260px; }
+        }
+    </style>
 </head>
+
 <body>
-<div class="gradient-bg"></div>
 
-<div id="page1" class="page active">
-    <h1>Happy Mensiversary ke-28 ❤️</h1>
-    <div class="ask-text">Mau lihat isi suratnya? 💌</div>
+    <div class="gradient-bg"></div>
 
-    <img id="suratImg" src="surat.jpg" alt="Surat Cinta">
+    <!-- PAGE 1 -->
+    <div id="page1" class="page active">
+        <h1>Happy Mensiversary ke-28 ❤️</h1>
 
-    <div style="margin-top:25px; position:relative; height:120px;">
-        <button class="btn" id="yesBtn">Iya ❤️</button>
-        <button class="btn" id="noBtn">Tidak 🙅</button>
-    </div>
-</div>
+        <div class="ask-text">Mau lihat isi suratnya? 💌</div>
 
-<div id="page2" class="page">
-    <div class="paper">
-        <h2>Surat Cinta Untukmu ❤️</h2>
-        <p id="mainLetter">Sayangku, terima kasih sudah setia mendampingi setiap langkahku.<br>
-        Kamu adalah penyemangatku, kebahagiaanku, dan rumah ternyaman bagiku.<br>
-        Selamat Mensiversary ke-28, cintaku ❤️</p>
-    </div>
+        <img id="suratImg" src="surat.jpg" alt="Surat Cinta">
 
-    <div class="reply-box">
-        <h3>Balas Surat Ini ✉️</h3>
-        <!-- kotak balasan (seperti kertas) -->
-        <textarea id="replyText" placeholder="Ketik balasanmu di sini..."></textarea>
-
-        <!-- tombol bergaya sama seperti Iya -->
-        <div style="display:flex;gap:12px;margin-top:12px;">
-            <button class="btn" style="flex:1;" onclick="sendReply();">Kirim Balasan</button>
-            <button class="btn" style="flex:1;" onclick="readReply();">🔒 Lihat Balasan</button>
-        </div>
-
-        <div id="replySecret" class="hidden-section">
-            <h4>Balasan Darinya 💌:</h4>
-            <p id="savedReply"></p>
+        <div style="margin-top:25px; position:relative; height:120px;">
+            <button class="btn" id="yesBtn">Iya ❤️</button>
+            <button class="btn" id="noBtn">Tidak 🙅</button>
         </div>
     </div>
-</div>
 
-<audio id="bgm" src="lagu.mp3" loop></audio>
+    <!-- PAGE 2 -->
+    <div id="page2" class="page">
+        <div class="paper">
+            <h2>Surat Cinta Untukmu ❤️</h2>
+            <p id="mainLetter">
+                Sayangku, terima kasih sudah setia mendampingi setiap langkahku.<br>
+                Kamu adalah penyemangatku, kebahagiaanku, dan rumah ternyaman bagiku.<br>
+                Selamat Mensiversary ke-28, cintaku ❤️
+            </p>
+        </div>
 
-<script>
-// play music on first user interaction (best-effort)
-function tryPlayBGM(){const m=document.getElementById('bgm');if(m && m.paused){m.play().catch(()=>{});}}
-window.addEventListener('click', tryPlayBGM, {once:true});
-window.addEventListener('touchstart', tryPlayBGM, {once:true});
+        <!-- Balasan -->
+        <div class="reply-box">
+            <h3>Balas Surat Ini ✉️</h3>
 
-// Elements
-const yesBtn = document.getElementById('yesBtn');
-const noBtn = document.getElementById('noBtn');
-const suratImg = document.getElementById('suratImg');
+            <textarea id="replyText" placeholder="Ketik balasanmu di sini..."></textarea>
 
-// Open letter — works for click and touch
-function openLetterHandler(e){
-    e.preventDefault && e.preventDefault();
-    suratImg.classList.add('shake');
-    // small vibration on supported mobile
-    if(navigator.vibrate) navigator.vibrate(70);
-    setTimeout(()=>document.getElementById('page1').classList.add('fade-out'),400);
-    setTimeout(()=>{
-        document.getElementById('page1').style.display='none';
-        const p2=document.getElementById('page2');
-        p2.style.display='block';
-        p2.classList.add('fade-in');
-    },1100);
-}
-yesBtn.addEventListener('click', openLetterHandler);
-yesBtn.addEventListener('touchstart', openLetterHandler);
+            <div style="display:flex; gap:12px; margin-top:12px;">
+                <button class="btn" style="flex:1;" onclick="sendReply()">Kirim Balasan</button>
+                <button class="btn" style="flex:1;" onclick="readReply()">🔒 Lihat Balasan</button>
+            </div>
 
-function moveNoFar() {
-    const btn = noBtn;
+            <div id="replySecret" class="hidden-section">
+                <h4>Balasan Darinya 💌:</h4>
+                <p id="savedReply"></p>
+            </div>
+        </div>
+    </div>
 
-    const btnW = btn.offsetWidth;
-    const btnH = btn.offsetHeight;
+    <audio id="bgm" src="lagu.mp3" loop></audio>
 
-    // batas aman agar tombol tidak keluar layar
-    const maxX = (window.innerWidth - btnW) / 2 - 40;
-    const maxY = (window.innerHeight - btnH) / 2 - 60;
+    <script>
+        /* AUDIO AUTOPLAY */
+        function tryPlayBGM(){
+            const m = document.getElementById('bgm');
+            if(m && m.paused){
+                m.play().catch(()=>{});
+            }
+        }
 
-    // posisi acak tetap berada dalam batas
-    let newX = Math.random() * (maxX * 2) - maxX;
-    let newY = Math.random() * (maxY * 2) - maxY;
+        window.addEventListener('click', tryPlayBGM, {once:true});
+        window.addEventListener('touchstart', tryPlayBGM, {once:true});
 
-    btn.style.transform = `translate(${newX}px, ${newY}px)`;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const suratImg = document.getElementById('suratImg');
 
-    // getaran kecil di HP
-    if (navigator.vibrate) navigator.vibrate(35);
-}
+        /* OPEN LETTER */
+        function openLetterHandler(e){
+            e.preventDefault && e.preventDefault();
+            suratImg.classList.add('shake');
 
-// send reply
-function sendReply(){
-    const t = document.getElementById('replyText').value.trim();
-    if(!t) return alert('Balasan tidak boleh kosong.');
-    localStorage.setItem('balasanSurat', t);
-    alert('Balasan berhasil dikirim ❤️');
-    document.getElementById('replyText').value='';
-}
+            if(navigator.vibrate) navigator.vibrate(70);
 
-// read reply (password-protected)
-function readReply(){
-    // custom modal prompt-like (instead of native prompt) for nicer UI
-    const pwd = prompt('Masukkan password untuk membuka balasan:');
-    if(pwd === '140723'){
-        const reply = localStorage.getItem('balasanSurat') || '(Belum ada balasan)';
-        document.getElementById('replySecret').style.display = 'block';
-        document.getElementById('savedReply').innerText = reply;
-    } else {
-        alert('Password salah!');
-    }
-}
+            setTimeout(()=>document.getElementById('page1').classList.add('fade-out'),400);
 
-// sparkles
-for(let i=0;i<30;i++){
-    const s = document.createElement('div'); s.className='sparkle';
-    s.style.left = Math.random()*100 + 'vw'; s.style.top = Math.random()*100 + 'vh';
-    s.style.animationDelay = Math.random()*2 + 's'; document.body.appendChild(s);
-}
-// hearts
-function makeHeart(){ const h = document.createElement('div'); h.className='heart'; h.innerHTML='❤️'; h.style.left = Math.random()*100 + 'vw'; h.style.fontSize = (18+Math.random()*28) + 'px'; document.body.appendChild(h); setTimeout(()=>h.remove(),4200);} setInterval(makeHeart,350);
-</script>
+            setTimeout(()=>{
+                document.getElementById('page1').style.display='none';
+                const p2 = document.getElementById('page2');
+                p2.style.display='block';
+                p2.classList.add('fade-in');
+            },1100);
+        }
+
+        yesBtn.addEventListener('click', openLetterHandler);
+        yesBtn.addEventListener('touchstart', openLetterHandler);
+
+        /* TOMBOL TIDAK */
+        function moveNoFar(){
+            const jumpX = (Math.random()*800) - 400;
+            const jumpY = (Math.random()*800) - 400;
+
+            noBtn.style.transform = `translate(${jumpX}px, ${jumpY}px)`;
+
+            if(navigator.vibrate) navigator.vibrate([30]);
+        }
+
+        noBtn.addEventListener('mouseenter', moveNoFar);
+        noBtn.addEventListener('click', moveNoFar);
+        noBtn.addEventListener('touchstart', function(e){
+            e.preventDefault();
+            moveNoFar();
+        }, {passive:false});
+
+        /* BALAS SURAT */
+        function sendReply(){
+            const t = document.getElementById('replyText').value.trim();
+            if(!t) return alert('Balasan tidak boleh kosong.');
+
+            localStorage.setItem('balasanSurat', t);
+            alert('Balasan berhasil dikirim ❤️');
+            document.getElementById('replyText').value = '';
+        }
+
+        function readReply(){
+            const pwd = prompt('Masukkan password untuk membuka balasan:');
+
+            if(pwd === '140723'){
+                const reply = localStorage.getItem('balasanSurat') || '(Belum ada balasan)';
+                document.getElementById('replySecret').style.display = 'block';
+                document.getElementById('savedReply').innerText = reply;
+            } else {
+                alert('Password salah!');
+            }
+        }
+
+        /* SPARKLES */
+        for(let i=0;i<30;i++){
+            const s = document.createElement('div');
+            s.className='sparkle';
+            s.style.left = Math.random()*100 + 'vw';
+            s.style.top  = Math.random()*100 + 'vh';
+            s.style.animationDelay = Math.random()*2 + 's';
+            document.body.appendChild(s);
+        }
+
+        /* HEARTS ANIMATION */
+        function makeHeart(){
+            const h = document.createElement('div');
+            h.className='heart';
+            h.innerHTML='❤️';
+            h.style.left = Math.random()*100 + 'vw';
+            h.style.fontSize = (18 + Math.random()*28) + 'px';
+
+            document.body.appendChild(h);
+            setTimeout(()=>h.remove(),4200);
+        }
+        setInterval(makeHeart,350);
+
+    </script>
+
 </body>
 </html>
