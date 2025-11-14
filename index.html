@@ -10,7 +10,7 @@
         margin: 0;
         font-family: Arial, sans-serif;
         background: #ffd6e8;
-        overflow-x: hidden;
+        overflow: hidden;  /* ⛔ Tidak bisa scroll */
     }
 
     /* LOVE PARTICLE */
@@ -29,7 +29,7 @@
         100% {transform: translateY(120vh) rotate(360deg);}
     }
 
-    /* SPARKLE ANIMATION */
+    /* SPARKLE */
     .sparkle {
         position: absolute;
         width: 15px;
@@ -65,7 +65,7 @@
         background: #ff6f9c;
     }
 
-    /* POSISI TOMBOL BERJERJER */
+    /* Tombol berjejer */
     .btn-row {
         display: flex;
         justify-content: center;
@@ -75,32 +75,25 @@
     }
 
     #yesBtn, #noBtn {
+        position: relative; 
+    }
+
+    /* Fade effect */
+    .fade-out { animation: fadeOut 0.6s forwards; }
+    @keyframes fadeOut { to { opacity: 0; transform: scale(1.05);} }
+
+    .fade-in { animation: fadeIn 0.7s forwards; }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+    /* Halaman tanpa scroll */
+    #startPage, #letterPage {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
         position: relative;
     }
 
-    /* FADE */
-    .fade-out {
-        animation: fadeOut 0.6s forwards;
-    }
-    @keyframes fadeOut {
-        to { opacity: 0; transform: scale(1.05);}
-    }
-
-    .fade-in {
-        animation: fadeIn 0.7s forwards;
-    }
-    @keyframes fadeIn {
-        from {opacity: 0;}
-        to {opacity: 1;}
-    }
-
-    /* SURAT */
-    #letterPage {
-        display: none;
-        padding: 20px;
-        text-align: center;
-    }
-
+    /* Surat */
     .letter-box {
         width: 90%;
         max-width: 400px;
@@ -112,6 +105,7 @@
         min-height: 200px;
         font-size: 18px;
         white-space: pre-line;
+
         background-image: repeating-linear-gradient(
             to bottom,
             #ffd6e8 0px,
@@ -152,15 +146,17 @@
 </head>
 <body>
 
-<!-- AUDIO -->
-<audio id="clickSound" src="ding-sound-effect_1_0gpHFnw.mp3"></audio>
-<audio id="bgMusic" src="Ed Sheeran - Photograph (Official Lyric Video).mp3" loop autoplay></audio>
+<!-- Suara tombol -->
+<audio id="clickSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b4d9991c65.mp3"></audio>
 
-<div id="startPage" class="screen-boundary">
+<!-- Musik background (tidak autoplay sebelum user klik) -->
+<audio id="bgMusic" src="https://cdn.pixabay.com/audio/2023/06/13/audio_9e8baa3e31.mp3" loop></audio>
+
+<div id="startPage" class="screen-boundary fade-in">
     <div class="center">
         <h1>Mensiversary Ke-28 ❤️</h1>
         <p>Ada surat spesial untuk kamu...</p>
-        <img src="love-letter_1f48c.png" width="250" />
+        <img src="surat.png" width="250" />
     </div>
 
     <div class="btn-row">
@@ -169,7 +165,7 @@
     </div>
 </div>
 
-<div id="letterPage" class="fade-in">
+<div id="letterPage" class="fade-in" style="display:none;">
     <h2>Surat Untuk Kamu ❤️</h2>
 
     <div class="letter-box" id="letterContent">
@@ -204,8 +200,9 @@ setInterval(() => {
 const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
 const clickSound = document.getElementById("clickSound");
+const bgMusic = document.getElementById("bgMusic");
 
-/* ------------------- AGAR TIDAK KELUAR LAYAR ------------------- */
+/* ---------------- TOMBOL TIDAK TIDAK KELUAR LAYAR ---------------- */
 function moveNoBtn() {
     const btnWidth = noBtn.offsetWidth;
     const btnHeight = noBtn.offsetHeight;
@@ -226,7 +223,6 @@ function moveNoBtn() {
 noBtn.addEventListener("mouseover", moveNoBtn);
 noBtn.addEventListener("touchstart", moveNoBtn);
 
-
 /* ---------------- SPARKLE ---------------- */
 function createSparkle(x, y) {
     for (let i = 0; i < 8; i++) {
@@ -239,9 +235,10 @@ function createSparkle(x, y) {
     }
 }
 
-/* Klik IYA → Fade + Sparkle + Suara */
+/* Klik IYA → Fade + Sparkle + Musik */
 yesBtn.addEventListener('click', (e) => {
     clickSound.play();
+    bgMusic.play();   // 🔊 Musik mulai saat tombol Iya ditekan
 
     createSparkle(e.clientX, e.clientY);
 
@@ -254,7 +251,7 @@ yesBtn.addEventListener('click', (e) => {
     }, 500);
 });
 
-/* Balasan */
+/* Kirim balasan */
 function sendReply() {
     const text = document.getElementById('replyInput').value;
     localStorage.setItem('replyMessage', text);
