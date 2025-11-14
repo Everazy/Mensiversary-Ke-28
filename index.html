@@ -71,20 +71,11 @@
         justify-content: center;
         gap: 20px;
         margin-top: 40px;
+        position: relative;
     }
 
-    #noBtn, #yesBtn {
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-    }
-
-    /* BATAS LAYAR */
-    .screen-boundary {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
+    #yesBtn, #noBtn {
+        position: relative;
     }
 
     /* FADE */
@@ -210,30 +201,31 @@ setInterval(() => {
 }, 300);
 
 
-/* ----------------------------------- */
 const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
 const clickSound = document.getElementById("clickSound");
 
-/* AGAR TIDAK KELUAR LAYAR */
-function randomInRange(min, max) {
-    return Math.max(min, Math.min(max, Math.random() * (max - min) + min));
-}
-
-noBtn.addEventListener('mouseover', moveNoBtn);
-noBtn.addEventListener('touchstart', moveNoBtn);
-
+/* ------------------- AGAR TIDAK KELUAR LAYAR ------------------- */
 function moveNoBtn() {
-    let maxX = window.innerWidth - 150;
-    let maxY = window.innerHeight - 150;
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
 
-    let newX = randomInRange(20, maxX);
-    let newY = randomInRange(20, maxY);
+    const padding = 20;
+
+    const maxX = window.innerWidth - btnWidth - padding;
+    const maxY = window.innerHeight - btnHeight - padding;
+
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
 
     noBtn.style.position = "absolute";
-    noBtn.style.left = newX + 'px';
-    noBtn.style.top = newY + 'px';
+    noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
 }
+
+noBtn.addEventListener("mouseover", moveNoBtn);
+noBtn.addEventListener("touchstart", moveNoBtn);
+
 
 /* ---------------- SPARKLE ---------------- */
 function createSparkle(x, y) {
