@@ -1,204 +1,168 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensiversary ke-28</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mensiversary ke-28 ❤️</title>
 
-    <style>
-        body {
-            font-family: "Poppins", sans-serif;
-            background: #ffe6f2;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+body{
+    margin:0;
+    font-family:"Poppins",sans-serif;
+    overflow-x:hidden;
+    background:#ffb7d5;
+}
+.page{text-align:center;padding:40px 20px;display:none;}
+.active{display:block;}
+.gradient-bg{
+    position:fixed;width:100%;height:100%;
+    background:linear-gradient(135deg,#ff8fb1,#ffc8dd,#ffafcc);
+    z-index:-1;
+}
+h1{color:white;font-size:40px;margin-top:20px;text-shadow:0 0 10px #ff3e7f;}
+.ask-text{font-size:20px;color:white;margin:20px 0;text-shadow:0 0 8px #ff3e7f;}
 
-        .page {
-            display: none;
-            padding: 25px;
-        }
+/* — FOTO SURAT — */
+#suratImg{
+    width:320px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(255,80,140,0.5);
+    transition:0.4s ease;
+}
+.shake{animation:shakeAnim 0.6s ease;}
+@keyframes shakeAnim{
+    0%{transform:rotate(1deg);} 20%{transform:rotate(-2deg);} 40%{transform:rotate(2deg);} 60%{transform:rotate(-2deg);} 80%{transform:rotate(1.5deg);} 100%{transform:rotate(0deg);} }
 
-        .active {
-            display: block;
-        }
+/* TOMBOL */
+.btn{padding:12px 25px;border:none;background:#ff3e7f;color:white;border-radius:12px;font-size:18px;cursor:pointer;}
 
-        /* HALAMAN AWAL */
-        .cover-container {
-            text-align: center;
-            margin-top: 50px;
-        }
+/* TOMBOL TIDAK LARI */
+#noBtn{position:absolute;transition:0.25s;}
 
-        .cover-letter {
-            width: 230px;
-            animation: float 4s ease-in-out infinite;
-        }
+/* TRANSISI HALAMAN */
+.fade-out{animation:fadeOut 0.8s forwards;}
+@keyframes fadeOut{to{opacity:0;transform:scale(1.05);}}
+.fade-in{animation:fadeIn 1s forwards;}
+@keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
 
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0); }
-        }
+/* SURAT HALAMAN 2 */
+.paper{
+    width:90%;max-width:500px;margin:40px auto;background:#fffef6;padding:25px;border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);border:1px solid #f3e1b6;
+    background-image:linear-gradient(to bottom, transparent 97%, #ffdede 97%);
+    background-size:100% 35px;
+}
+.paper h2{text-align:center;color:#d63384;}
+.reply-box{margin-top:20px;padding:20px;background:white;border-radius:12px;box-shadow:0 0 12px rgba(0,0,0,0.1);} 
+textarea{width:100%;height:130px;padding:12px;font-size:15px;border-radius:10px;border:1px solid #ccc;resize:none;outline:none;} 
+.hidden-section{display:none;background:#fff8fd;padding:15px;border-left:4px solid #d63384;border-radius:10px;margin-top:20px;}
 
-        .btn-area {
-            margin-top: 20px;
-        }
+/* SPARKLES */
+.sparkle{position:fixed;width:4px;height:4px;background:white;border-radius:50%;animation:sparkle 2s infinite ease-in-out;opacity:.7;}
+@keyframes sparkle{0%{transform:scale(.2);opacity:.4}50%{transform:scale(1.2);opacity:1}100%{transform:scale(.2);opacity:.4}}
 
-        .btn {
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            background: #d63384;
-            color: white;
-            border-radius: 10px;
-            margin: 5px;
-            cursor: pointer;
-        }
-
-        /* KERTAS SURAT */
-        .paper {
-            width: 90%;
-            max-width: 500px;
-            margin: 40px auto;
-            background: #fffef6;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            border: 1px solid #f3e1b6;
-            background-image: 
-                linear-gradient(to bottom, transparent 97%, #ffdede 97%);
-            background-size: 100% 35px;
-        }
-
-        .paper h2 {
-            text-align: center;
-            color: #d63384;
-        }
-
-        /* BALAS SURAT */
-        .reply-box {
-            margin-top: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
-
-        textarea {
-            width: 100%;
-            height: 130px;
-            padding: 12px;
-            font-size: 15px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            resize: none;
-            outline: none;
-        }
-
-        button {
-            margin-top: 12px;
-            width: 100%;
-            padding: 12px;
-            background: #d63384;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .hidden-section {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff8fd;
-            border-left: 4px solid #d63384;
-            border-radius: 10px;
-            display: none;
-        }
-    </style>
+/* HEART FALL */
+.heart{position:fixed;color:#ff4d6d;animation:fall 4s linear infinite;}
+@keyframes fall{0%{transform:translateY(-10vh);opacity:1}100%{transform:translateY(110vh);opacity:0}}
+</style>
 </head>
 <body>
+<div class="gradient-bg"></div>
 
-    <!-- ========== HALAMAN AWAL ========== -->
-    <div id="page1" class="page active">
-        <div class="cover-container">
-            <img src="surat.jpg" class="cover-letter">
-            <h1>Happy Mensiversary ke-28 ❤️</h1>
-            <p>Mau baca surat spesial dariku? 💌</p>
+<!-- COVER PAGE -->
+<div id="page1" class="page active">
+    <h1>Happy Mensiversary ke-28 ❤️</h1>
+    <div class="ask-text">Mau lihat isi suratnya? 💌</div>
 
-            <div class="btn-area">
-                <button class="btn" onclick="openLetter()">Iya ❤️</button>
-                <button class="btn" onclick="noBtn()">Tidak 🙅</button>
-            </div>
-        </div>
+    <img id="suratImg" src="surat.jpg" alt="Surat Cinta">
+
+    <div style="margin-top:25px; position:relative; height:120px;">
+        <button class="btn" id="yesBtn">Iya ❤️</button>
+        <button class="btn" id="noBtn">Tidak 🙅</button>
+    </div>
+</div>
+
+<!-- LETTER PAGE -->
+<div id="page2" class="page">
+    <div class="paper">
+        <h2>Surat Cinta Untukmu ❤️</h2>
+        <p id="mainLetter">
+            Sayangku, terima kasih sudah setia mendampingi setiap langkahku.<br>
+            Kamu adalah penyemangatku, kebahagiaanku, dan rumah ternyaman bagiku.<br>
+            Selamat Mensiversary ke-28, cintaku ❤️
+        </p>
     </div>
 
-    <!-- ========== HALAMAN SURAT ========== -->
-    <div id="page2" class="page">
+    <div class="reply-box">
+        <h3>Balas Surat Ini ✉️</h3>
+        <textarea id="replyText" placeholder="Ketik balasanmu di sini..."></textarea>
+        <button onclick="sendReply()">Kirim Balasan</button>
+        <button onclick="readReply()">🔒 Lihat Balasan (Password)</button>
 
-        <div class="paper">
-            <h2>Surat Cinta Untukmu ❤️</h2>
-
-            <!-- EDIT ISI SURAT DI SINI -->
-            <p id="mainLetter">
-                Sayangku, terima kasih sudah setia mendampingi setiap langkahku.  
-                Kamu adalah penyemangatku, kebahagiaanku, dan rumah ternyaman bagiku.  
-                Selamat Mensiversary ke-28, cintaku. Semoga hubungan kita selalu hangat  
-                dan penuh kasih sayang seperti hari ini ❤️  
-            </p>
-            <!-- END -->
-        </div>
-
-        <!-- FITUR BALASAN -->
-        <div class="reply-box">
-            <h3>Balas Surat Ini ✉️</h3>
-            <textarea id="replyText" placeholder="Ketik balasanmu di sini..."></textarea>
-            <button onclick="sendReply()">Kirim Balasan</button>
-
-            <button onclick="readReply()">🔒 Lihat Balasan (Password)</button>
-
-            <div id="replySecret" class="hidden-section">
-                <h4>Balasan Darinya 💌:</h4>
-                <p id="savedReply"></p>
-            </div>
+        <div id="replySecret" class="hidden-section">
+            <h4>Balasan Darinya 💌:</h4>
+            <p id="savedReply"></p>
         </div>
     </div>
+</div>
+
+<audio id="bgm" src="lagu.mp3" loop></audio>
 
 <script>
-    /* PINDAH HALAMAN */
-    function openLetter() {
-        document.getElementById("page1").classList.remove("active");
-        document.getElementById("page2").classList.add("active");
-    }
+// Musik auto-play
+addEventListener('click',function once(){let m=document.getElementById("bgm");if(m.paused)m.play().catch(()=>{});removeEventListener("click",once);});
 
-    function noBtn() {
-        alert("Yaah :'( tapi kamu tetap harus baca! 💗");
-    }
+// Tombol Iya
+const yesBtn=document.getElementById("yesBtn");
+const surat=document.getElementById("suratImg");
+yesBtn.onclick=()=>{
+    surat.classList.add("shake");
+    setTimeout(()=>{document.getElementById("page1").classList.add("fade-out");},400);
+    setTimeout(()=>{
+        document.getElementById("page1").style.display="none";
+        let lp=document.getElementById("page2");
+        lp.style.display="block";
+        lp.classList.add("fade-in");
+    },1200);
+};
 
-    /* SIMPAN BALASAN */
-    function sendReply() {
-        let text = document.getElementById("replyText").value.trim();
-        if (text === "") return alert("Balasan tidak boleh kosong.");
+// Tombol Tidak Menghindar
+const noBtn=document.getElementById("noBtn");
+noBtn.onmouseover=noBtn.onclick=()=>{
+    let x=Math.random()*200 - 100;
+    let y=Math.random()*200 - 100;
+    noBtn.style.transform=`translate(${x}px,${y}px)`;
+};
 
-        localStorage.setItem("balasanSurat", text);
-        alert("Balasan berhasil dikirim ❤️");
-        document.getElementById("replyText").value = "";
-    }
+// Simpan balasan
+function sendReply(){
+    let text=document.getElementById("replyText").value.trim();
+    if(text==="") return alert("Balasan tidak boleh kosong.");
+    localStorage.setItem("balasanSurat",text);
+    alert("Balasan berhasil dikirim ❤️");
+    document.getElementById("replyText").value="";
+}
 
-    /* LIHAT BALASAN TERPROTEKSI PASSWORD */
-    function readReply() {
-        let pwd = prompt("Masukkan password untuk membuka balasan:");
+// Password lihat balasan
+function readReply(){
+    let pwd=prompt("Masukkan password untuk membuka balasan:");
+    if(pwd==="140723"){
+        let reply=localStorage.getItem("balasanSurat")||"(Belum ada balasan)";
+        document.getElementById("replySecret").style.display="block";
+        document.getElementById("savedReply").innerText=reply;
+    } else alert("Password salah!");
+}
 
-        if (pwd === "140723") {
-            let reply = localStorage.getItem("balasanSurat");
-            if (!reply) reply = "(Belum ada balasan)";
+// Sparkles
+for(let i=0;i<30;i++){
+    let s=document.createElement("div");s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*100+"vh";
+    s.style.animationDelay=Math.random()*2+"s";
+    document.body.appendChild(s);
+}
 
-            document.getElementById("replySecret").style.display = "block";
-            document.getElementById("savedReply").innerText = reply;
-        } else {
-            alert("Password salah!");
-        }
-    }
+// Hearts
+function makeHeart(){let h=document.createElement("div");h.className="heart";h.innerHTML="❤️";h.style.left=Math.random()*100+"vw";h.style.fontSize=(20+Math.random()*25)+"px";document.body.appendChild(h);setTimeout(()=>h.remove(),4200);}setInterval(makeHeart,350);
 </script>
-
 </body>
 </html>
