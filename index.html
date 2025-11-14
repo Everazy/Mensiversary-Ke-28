@@ -6,122 +6,251 @@
 <title>Happy Mensiversary ke-28 ❤️</title>
 
 <style>
-body{
-    margin:0;
-    font-family:"Poppins",sans-serif;
-    overflow-x:hidden;
-    background:#ffb7d5;
-}
-.page{text-align:center;padding:40px 20px;}
-.gradient-bg{
-    position:fixed;width:100%;height:100%;
-    background:linear-gradient(135deg,#ff8fb1,#ffc8dd,#ffafcc);
-    z-index:-1;
-}
-h1{color:white;font-size:40px;margin-top:20px;text-shadow:0 0 10px #ff3e7f;}
-.ask-text{font-size:20px;color:white;margin:20px 0;text-shadow:0 0 8px #ff3e7f;}
-
-/* — FOTO SURAT — */
-#suratImg{
-    width:320px;
-    background-image: url('love-letter_1f48c.png');
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,80,140,0.5);
-    transition:0.4s ease;
-}
-.shake{
-    animation:shakeAnim 0.6s ease;
-}
-@keyframes shakeAnim{
-    0%{transform:rotate(1deg);}
-    20%{transform:rotate(-2deg);}
-    40%{transform:rotate(2deg);}
-    60%{transform:rotate(-2deg);}
-    80%{transform:rotate(1.5deg);}
-    100%{transform:rotate(0deg);}
+/* ——— BASIC STYLE —————————————— */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    background: #ffb7d5;
 }
 
-/* — TRANSISI HALAMAN — */
-.fade-out{
-    animation:fadeOut 0.8s forwards;
-}
-@keyframes fadeOut{
-    to{opacity:0;transform:scale(1.05);}
-}
-.fade-in{
-    animation:fadeIn 1s forwards;
-}
-@keyframes fadeIn{
-    from{opacity:0;} to{opacity:1;}
+.page { text-align: center; padding: 40px 20px; }
+
+.gradient-bg {
+    position: fixed;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #ff8fb1, #ffc8dd, #ffafcc);
+    z-index: -1;
 }
 
-/* FOTO KERTAS ISI SURAT */
-#isiSurat img{
-    width:85%;
-    max-width:450px;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,100,150,0.6);
+h1 {
+    color: white;
+    font-size: 40px;
+    margin-top: 20px;
+    text-shadow: 0 0 10px #ff3e7f;
 }
 
-/* SPARKLES */
-.sparkle{position:fixed;width:4px;height:4px;background:white;border-radius:50%;animation:sparkle 2s infinite ease-in-out;opacity:.7;}
-@keyframes sparkle{0%{transform:scale(.2);opacity:.4}50%{transform:scale(1.2);opacity:1}100%{transform:scale(.2);opacity:.4}}
+.ask-text {
+    font-size: 20px;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px #ff3e7f;
+}
 
-/* HEART FALL */
-.heart{position:fixed;color:#ff4d6d;animation:fall 4s linear infinite;}
-@keyframes fall{0%{transform:translateY(-10vh);opacity:1}100%{transform:translateY(110vh);opacity:0}}
+/* 🟦 CSS BARU – FOTO SURAT */
+.surat-img-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.surat-img {
+    width: 300px;
+    max-width: 80%;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255, 80, 140, 0.5);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ——— BUTTON AREA —————————————— */
+.btn-wrap {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    background: #ff3e7f;
+    color: white;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.btn:hover { transform: scale(1.04); }
+
+#yesBtn { position: absolute; left: 30%; top: 120px; }
+#noBtn  { position: absolute; left: 55%; top: 120px; }
+
+/* ——— HALAMAN ISI SURAT —————————————— */
+.photos img {
+    width: 260px;
+    border-radius: 20px;
+    margin: 10px;
+    box-shadow: 0 0 20px rgba(255,100,150,0.6);
+}
+
+.love-letter {
+    width: 80%;
+    max-width: 480px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255,100,150,0.6);
+    color: #d6336c;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* ——— DEKORASI —————————————— */
+.sparkle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle 2s infinite ease-in-out;
+    opacity: 0.7;
+}
+@keyframes sparkle {
+    0% {transform:scale(0.2);opacity:0.4}
+    50%{transform:scale(1.2);opacity:1}
+    100%{transform:scale(0.2);opacity:0.4}
+}
+
+.heart {
+    position: fixed;
+    color: #ff4d6d;
+    animation: fall 4s linear infinite;
+}
+@keyframes fall {
+    0%{transform:translateY(-10vh);opacity:1}
+    100%{transform:translateY(110vh);opacity:0}
+}
+
 </style>
 </head>
 <body>
+
 <div class="gradient-bg"></div>
 
-<!-- COVER PAGE -->
+<!-- ——— COVER PAGE —————————————— -->
 <div id="coverPage" class="page">
+
     <h1>Happy Mensiversary ke-28 ❤️</h1>
     <div class="ask-text">Mau lihat isi suratnya? 💌</div>
 
-    <img id="suratImg" src="surat.jpg" alt="Surat Cinta">
+    <!-- 🟩 TAMBAHAN BARU: FOTO SURAT -->
+    <div class="surat-img-box">
+        <img src="love-letter_1f48c.png" class="surat-img">
+    </div>
 
-    <div style="margin-top:25px;">
-        <button class="btn" id="yesBtn" style="padding:12px 25px;border:none;background:#ff3e7f;color:white;border-radius:12px;font-size:18px;cursor:pointer;">Iya ❤️</button>
+    <!-- BUTTONS -->
+    <div class="btn-wrap" id="btnWrap">
+        <button class="btn" id="yesBtn" onclick="animateEnvelope()">Iya ❤️</button>
+        <button class="btn" id="noBtn">Tidak 🙅</button>
     </div>
 </div>
 
-<!-- LETTER PAGE -->
-<div id="letterPage" class="page" style="display:none;">
+<!-- ——— LETTER PAGE —————————————— -->
+<div id="letterPage" class="page" style="display: none;">
     <h1>Untuk Kamu yang Aku Cintai ❤️</h1>
-    <div id="isiSurat">
-        <img src="isi-surat.jpg" alt="Isi Surat">
-    </div>
+
+    <!-- kamu bisa ganti dengan foto isi surat -->
+    <img src="isi-surat.jpg" style="width: 80%; border-radius: 20px; box-shadow: 0 0 20px rgba(255,90,140,0.5);">
 </div>
 
 <!-- MUSIC -->
 <audio id="bgm" src="lagu.mp3" loop></audio>
 
 <script>
-// PLAY MUSIC
-addEventListener('click',function once(){let m=document.getElementById("bgm");if(m.paused)m.play().catch(()=>{});removeEventListener("click",once);});
+/* ——— PLAY MUSIC ON FIRST INTERACTION —————————————— */
+document.addEventListener('click', function once() {
+    let m = document.getElementById("bgm");
+    if (m.paused) m.play().catch(()=>{});
+    document.removeEventListener("click", once);
+});
 
-// TOMBOL IYA
-const yesBtn=document.getElementById("yesBtn");
-const surat=document.getElementById("suratImg");
+/* ——— ANIMASI TRANSISI KE ISI SURAT —————————————— */
+function animateEnvelope(){
+    const cover = document.getElementById("coverPage");
+    const letter = document.getElementById("letterPage");
 
-yesBtn.onclick=()=>{
-    surat.classList.add("shake");
+    // 🟩 Animasi getar sedikit sebelum pindah
+    cover.style.animation = "shake 0.4s ease";
 
     setTimeout(()=>{
-        document.getElementById("coverPage").classList.add("fade-out");
-    },400);
+        cover.style.opacity = "0";
+        setTimeout(()=>{
+            cover.style.display = "none";
+            letter.style.display = "block";
+            letter.style.opacity = "0";
+            setTimeout(()=> letter.style.opacity = "1", 50);
+        }, 400);
+    }, 300);
+}
 
-    setTimeout(()=>{
-        document.getElementById("coverPage").style.display="none";
-        let lp=document.getElementById("letterPage");
-        lp.style.display="block";
-        lp.classList.add("fade-in");
-    },1200);
-};
+/* Getar halus */
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes shake {
+    0% {transform: translate(0,0)}
+    25% {transform: translate(4px,-4px)}
+    50% {transform: translate(-4px,4px)}
+    75% {transform: translate(4px,4px)}
+    100%{transform: translate(0,0)}
+}`;
+document.head.appendChild(style);
 
-// SPARKLES
+/* ——— tombol tidak bergerak —————————————— */
+(function(){
+    const noBtn = document.getElementById('noBtn');
+    const btnWrap = document.getElementById('btnWrap');
+    const yesBtn = document.getElementById('yesBtn');
+
+    function moveNoBtn(){
+        const wrap = btnWrap.getBoundingClientRect();
+        const yes = yesBtn.getBoundingClientRect();
+        const w = noBtn.offsetWidth;
+        const h = noBtn.offsetHeight;
+
+        let left, top, overlap, tries=0;
+
+        const maxLeft = wrap.width - w;
+        const maxTop = wrap.height - h;
+
+        do {
+            left = Math.random() * maxLeft;
+            top  = Math.random() * maxTop;
+
+            const cand = {
+                left: wrap.left + left,
+                right: wrap.left + left + w,
+                top: wrap.top + top,
+                bottom: wrap.top + top + h
+            };
+
+            overlap = !(cand.right < yes.left ||
+                        cand.left > yes.right ||
+                        cand.bottom < yes.top ||
+                        cand.top > yes.bottom);
+
+            tries++;
+        } while(overlap && tries < 20);
+
+        noBtn.style.left = left+"px";
+        noBtn.style.top  = top+"px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoBtn);
+    noBtn.addEventListener("touchstart", e => { e.preventDefault(); moveNoBtn(); });
+    noBtn.addEventListener("click", e => { e.preventDefault(); moveNoBtn(); });
+})();
+
+/* ——— SPARKLES —————————————— */
 for(let i=0;i<30;i++){
     let s=document.createElement("div");
     s.className="sparkle";
@@ -131,7 +260,19 @@ for(let i=0;i<30;i++){
     document.body.appendChild(s);
 }
 
-// HEART PARTICLESunction makeHeart(){let h=document.createElement("div");h.className="heart";h.innerHTML="❤️";h.style.left=Math.random()*100+"vw";h.style.fontSize=(20+Math.random()*25)+"px";document.body.appendChild(h);setTimeout(()=>h.remove(),4200);}setInterval(makeHeart,350);
+/* ——— HEART PARTICLES —————————————— */
+function makeHeart(){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(20+Math.random()*25)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4200);
+}
+setInterval(makeHeart,350);
+
 </script>
+
 </body>
 </html>
