@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mensiversary ke-28</title>
+
 <style>
     body {
         margin: 0;
@@ -32,21 +33,22 @@
         background: #ff6f9c;
     }
 
-    #noBtn {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 60%;
-    }
-
+    /* Tombol di halaman awal rapi */
     #yesBtn {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 50%;
+        top: 55%;
     }
 
-    /* BATAS LAYAR */
+    #noBtn {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 65%;
+    }
+
+    /* Batas layar untuk mencegah keluar */
     .screen-boundary {
         position: relative;
         width: 100vw;
@@ -54,13 +56,14 @@
         overflow: hidden;
     }
 
-    /* SURAT */
+    /* Surat */
     #letterPage {
         display: none;
         padding: 20px;
         text-align: center;
     }
 
+    /* Kertas bergaris seperti buku tulis */
     .letter-box {
         width: 90%;
         max-width: 400px;
@@ -69,9 +72,16 @@
         margin: 20px auto;
         border-radius: 20px;
         box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        min-height: 200px;
+        min-height: 250px;
         font-size: 18px;
         white-space: pre-line;
+
+        background-image:
+            linear-gradient(to bottom, rgba(0,0,255,0.15) 1px, transparent 1px),
+            linear-gradient(to right, rgba(255,0,0,0.35) 2px, transparent 2px);
+        background-size:
+            100% 32px,
+            45px 100%;
     }
 
     .reply-box {
@@ -99,8 +109,39 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    /* Sparkle */
+    @keyframes sparkleAnim {
+        0% { transform: scale(0.2); opacity: 0.3; }
+        50% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(0.2); opacity: 0.3; }
+    }
+
+    .sparkle {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        animation: sparkleAnim 0.8s ease-out forwards;
+        pointer-events: none;
+    }
+
+    /* Partikel love jatuh */
+    @keyframes loveFall {
+        0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .love {
+        position: fixed;
+        font-size: 18px;
+        animation: loveFall 4s linear infinite;
+        pointer-events: none;
+    }
 </style>
 </head>
+
 <body>
 
 <div id="startPage" class="screen-boundary">
@@ -146,8 +187,8 @@ noBtn.addEventListener('mouseover', moveNoBtn);
 noBtn.addEventListener('touchstart', moveNoBtn);
 
 function moveNoBtn() {
-    let maxX = window.innerWidth - 120;
-    let maxY = window.innerHeight - 120;
+    let maxX = window.innerWidth - 140;
+    let maxY = window.innerHeight - 140;
 
     let newX = randomInRange(20, maxX);
     let newY = randomInRange(20, maxY);
@@ -156,23 +197,36 @@ function moveNoBtn() {
     noBtn.style.top = newY + 'px';
 }
 
-// Jika klik iya → masuk ke surat
-yesBtn.addEventListener('click', () => {
-    yesBtn.style.animation = 'shake 0.4s';
+/* Efek sparkle saat pencet tombol Iya */
+function sparkleEffect(x, y) {
+    for (let i = 0; i < 8; i++) {
+        let s = document.createElement("div");
+        s.classList.add("sparkle");
+        s.style.left = (x + (Math.random()*40 - 20)) + "px";
+        s.style.top = (y + (Math.random()*40 - 20)) + "px";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 900);
+    }
+}
+
+/* Klik Iya → buka surat */
+yesBtn.addEventListener('click', (e) => {
+    sparkleEffect(e.clientX, e.clientY);
+
     setTimeout(() => {
         document.getElementById('startPage').style.display = 'none';
         document.getElementById('letterPage').style.display = 'block';
-    }, 400);
+    }, 300);
 });
 
-// Balasan
+/* Kirim balasan */
 function sendReply() {
     const text = document.getElementById('replyInput').value;
     localStorage.setItem('replyMessage', text);
     alert('Balasan terkirim! ❤️');
 }
 
-// Password
+/* Baca balasan (password) */
 function openMessage() {
     const pw = document.getElementById('pw').value;
     if (pw === "140723") {
@@ -183,6 +237,18 @@ function openMessage() {
         alert('Password salah!');
     }
 }
+
+/* Partikel love */
+function createLove() {
+    const h = document.createElement("div");
+    h.classList.add("love");
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (18 + Math.random()*25) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+}
+setInterval(createLove, 400);
 </script>
 
 </body>
