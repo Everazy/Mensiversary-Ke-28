@@ -22,7 +22,6 @@ body{
 h1{color:white;font-size:40px;margin-top:20px;text-shadow:0 0 10px #ff3e7f;}
 .ask-text{font-size:20px;color:white;margin:20px 0;text-shadow:0 0 8px #ff3e7f;}
 
-/* — FOTO SURAT — */
 #suratImg{
     width:320px;
     border-radius:20px;
@@ -31,21 +30,46 @@ h1{color:white;font-size:40px;margin-top:20px;text-shadow:0 0 10px #ff3e7f;}
 }
 .shake{animation:shakeAnim 0.6s ease;}
 @keyframes shakeAnim{
-    0%{transform:rotate(1deg);} 20%{transform:rotate(-2deg);} 40%{transform:rotate(2deg);} 60%{transform:rotate(-2deg);} 80%{transform:rotate(1.5deg);} 100%{transform:rotate(0deg);} }
+    0%{transform:rotate(1deg);} 
+    20%{transform:rotate(-2deg);} 
+    40%{transform:rotate(2deg);} 
+    60%{transform:rotate(-2deg);} 
+    80%{transform:rotate(1.5deg);} 
+    100%{transform:rotate(0deg);} }
 
-/* TOMBOL */
-.btn{padding:12px 25px;border:none;background:#ff3e7f;color:white;border-radius:12px;font-size:18px;cursor:pointer;}
+.btn{
+    padding:12px 25px;
+    border:none;
+    background:#ff3e7f;
+    color:white;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+}
 
-/* TOMBOL TIDAK LARI */
-#noBtn{position:absolute;transition:0.25s;}
+#noBtn{
+    position:absolute;
+    transition:0.25s;
+}
 
-/* TRANSISI HALAMAN */
-.fade-out{animation:fadeOut 0.8s forwards;}
-@keyframes fadeOut{to{opacity:0;transform:scale(1.05);}}
-.fade-in{animation:fadeIn 1s forwards;}
-@keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
+.btn-pretty{
+    width:100%;
+    margin-top:12px;
+    padding:14px;
+    border:none;
+    border-radius:15px;
+    font-size:17px;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff4d8d,#ff77b4);
+    box-shadow:0 4px 12px rgba(255,0,100,0.3);
+    transition:0.3s;
+}
+.btn-pretty:hover{
+    transform:scale(1.05);
+    box-shadow:0 6px 18px rgba(255,0,140,0.5);
+}
 
-/* SURAT HALAMAN 2 */
 .paper{
     width:90%;max-width:500px;margin:40px auto;background:#fffef6;padding:25px;border-radius:12px;
     box-shadow:0 0 15px rgba(0,0,0,0.2);border:1px solid #f3e1b6;
@@ -53,15 +77,14 @@ h1{color:white;font-size:40px;margin-top:20px;text-shadow:0 0 10px #ff3e7f;}
     background-size:100% 35px;
 }
 .paper h2{text-align:center;color:#d63384;}
+
 .reply-box{margin-top:20px;padding:20px;background:white;border-radius:12px;box-shadow:0 0 12px rgba(0,0,0,0.1);} 
 textarea{width:100%;height:130px;padding:12px;font-size:15px;border-radius:10px;border:1px solid #ccc;resize:none;outline:none;} 
 .hidden-section{display:none;background:#fff8fd;padding:15px;border-left:4px solid #d63384;border-radius:10px;margin-top:20px;}
 
-/* SPARKLES */
 .sparkle{position:fixed;width:4px;height:4px;background:white;border-radius:50%;animation:sparkle 2s infinite ease-in-out;opacity:.7;}
 @keyframes sparkle{0%{transform:scale(.2);opacity:.4}50%{transform:scale(1.2);opacity:1}100%{transform:scale(.2);opacity:.4}}
 
-/* HEART FALL */
 .heart{position:fixed;color:#ff4d6d;animation:fall 4s linear infinite;}
 @keyframes fall{0%{transform:translateY(-10vh);opacity:1}100%{transform:translateY(110vh);opacity:0}}
 </style>
@@ -69,7 +92,6 @@ textarea{width:100%;height:130px;padding:12px;font-size:15px;border-radius:10px;
 <body>
 <div class="gradient-bg"></div>
 
-<!-- COVER PAGE -->
 <div id="page1" class="page active">
     <h1>Happy Mensiversary ke-28 ❤️</h1>
     <div class="ask-text">Mau lihat isi suratnya? 💌</div>
@@ -82,7 +104,6 @@ textarea{width:100%;height:130px;padding:12px;font-size:15px;border-radius:10px;
     </div>
 </div>
 
-<!-- LETTER PAGE -->
 <div id="page2" class="page">
     <div class="paper">
         <h2>Surat Cinta Untukmu ❤️</h2>
@@ -96,8 +117,8 @@ textarea{width:100%;height:130px;padding:12px;font-size:15px;border-radius:10px;
     <div class="reply-box">
         <h3>Balas Surat Ini ✉️</h3>
         <textarea id="replyText" placeholder="Ketik balasanmu di sini..."></textarea>
-        <button onclick="sendReply()">Kirim Balasan</button>
-        <button onclick="readReply()">🔒 Lihat Balasan (Password)</button>
+        <button class="btn-pretty" onclick="sendReply()">Kirim Balasan</button>
+        <button class="btn-pretty" onclick="readReply()">🔒 Lihat Balasan (Password)</button>
 
         <div id="replySecret" class="hidden-section">
             <h4>Balasan Darinya 💌:</h4>
@@ -109,10 +130,8 @@ textarea{width:100%;height:130px;padding:12px;font-size:15px;border-radius:10px;
 <audio id="bgm" src="lagu.mp3" loop></audio>
 
 <script>
-// Musik auto-play
 addEventListener('click',function once(){let m=document.getElementById("bgm");if(m.paused)m.play().catch(()=>{});removeEventListener("click",once);});
 
-// Tombol Iya
 const yesBtn=document.getElementById("yesBtn");
 const surat=document.getElementById("suratImg");
 yesBtn.onclick=()=>{
@@ -126,15 +145,13 @@ yesBtn.onclick=()=>{
     },1200);
 };
 
-// Tombol Tidak Menghindar
 const noBtn=document.getElementById("noBtn");
 noBtn.onmouseover=noBtn.onclick=()=>{
-    let x=Math.random()*200 - 100;
-    let y=Math.random()*200 - 100;
-    noBtn.style.transform=`translate(${x}px,${y}px)`;
+    let x = Math.random() * 1200 - 600;
+    let y = Math.random() * 800 - 400;
+    noBtn.style.transform = `translate(${x}px,${y}px)`;
 };
 
-// Simpan balasan
 function sendReply(){
     let text=document.getElementById("replyText").value.trim();
     if(text==="") return alert("Balasan tidak boleh kosong.");
@@ -143,7 +160,6 @@ function sendReply(){
     document.getElementById("replyText").value="";
 }
 
-// Password lihat balasan
 function readReply(){
     let pwd=prompt("Masukkan password untuk membuka balasan:");
     if(pwd==="140723"){
@@ -153,7 +169,6 @@ function readReply(){
     } else alert("Password salah!");
 }
 
-// Sparkles
 for(let i=0;i<30;i++){
     let s=document.createElement("div");s.className="sparkle";
     s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*100+"vh";
@@ -161,8 +176,4 @@ for(let i=0;i<30;i++){
     document.body.appendChild(s);
 }
 
-// Hearts
-function makeHeart(){let h=document.createElement("div");h.className="heart";h.innerHTML="❤️";h.style.left=Math.random()*100+"vw";h.style.fontSize=(20+Math.random()*25)+"px";document.body.appendChild(h);setTimeout(()=>h.remove(),4200);}setInterval(makeHeart,350);
-</script>
-</body>
-</html>
+function makeHeart(){let h=document.create
