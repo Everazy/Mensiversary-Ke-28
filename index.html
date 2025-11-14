@@ -1,320 +1,416 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Happy Mensiversary ke-28 ❤️</title>
-
 <style>
 /* ——— BASIC STYLE —————————————— */
+* { box-sizing: border-box; }
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
     overflow-x: hidden;
-    background: #ffb7d5;
+    background: linear-gradient(135deg, #ffefef 0%, #ffe6f0 50%, #fff8fb 100%);
+    min-height: 100vh;
 }
 
+/* center page */
 .page { text-align: center; padding: 40px 20px; }
 
-.gradient-bg {
-    position: fixed;
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, #ff8fb1, #ffc8dd, #ffafcc);
-    z-index: -1;
-}
-
+/* heading */
 h1 {
-    color: white;
-    font-size: 40px;
-    margin-top: 20px;
-    text-shadow: 0 0 10px #ff3e7f;
+    color: #ff2f6d;
+    font-size: 36px;
+    margin: 6px 0 12px;
+    text-shadow: 0 6px 18px rgba(255,64,112,0.15);
 }
 
+/* prompt */
 .ask-text {
-    font-size: 20px;
-    color: white;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-shadow: 0 0 8px #ff3e7f;
+    font-size: 18px;
+    color: #ff5b88;
+    margin-bottom: 18px;
 }
 
-/* ——— AMBLOP & ANIMASI SURAT —————————————— */
+/* ——— ENVELOPE —————————————— */
 .envelope-container {
     position: relative;
-    width: 320px;
+    width: 340px;
     height: 240px;
-    margin: 0 auto;
+    margin: 12px auto;
+    perspective: 900px; /* allow 3D flip */
+    z-index: 6;
 }
 
+/* body of envelope */
 .envelope-body {
     width: 100%;
-    height: 180px;
-    background: white;
-    border-radius: 15px;
+    height: 170px;
+    background: linear-gradient(180deg,#fff #ffeef6);
+    border-radius: 14px;
     position: absolute;
     bottom: 0;
-    box-shadow: 0 0 20px rgba(255,80,140,0.4);
+    left: 0;
+    box-shadow: 0 10px 30px rgba(255,80,140,0.18), inset 0 -6px 18px rgba(255,200,220,0.5);
+    overflow: hidden;
+    border: 1px solid rgba(255,70,120,0.06);
 }
 
+/* flap: centered triangle */
 .envelope-flap {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 160px solid transparent;
-    border-right: 160px solid transparent;
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
     border-bottom: 120px solid #ff5c8a;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: top center;
-    transition: 0.8s ease;
+    transform-origin: bottom center; /* rotate around bottom edge */
+    box-shadow: 0 10px 30px rgba(255,80,140,0.12);
+    transition: transform 0.9s cubic-bezier(.2,.9,.3,1);
+    z-index: 8;
+    backface-visibility: hidden;
 }
 
-/* animasi flap terbuka */
-.flap-open {
-    transform: rotateX(180deg);
+/* flap open (flip up) */
+.envelope-container.open .envelope-flap {
+    transform: translateX(-50%) rotateX(-180deg) translateY(-10px);
 }
 
-/* kertas surat */
+/* letter paper (initial hidden below) */
 .letter-paper {
-    width: 85%;
-    height: 140px;
-    background: #fff7fb;
-    border-radius: 10px;
+    width: 84%;
+    max-width: 300px;
+    height: 150px;
+    background: linear-gradient(180deg,#fffafc,#fff0f6);
+    border-radius: 8px;
     position: absolute;
-    bottom: 20px;
-    left: 7.5%;
-    box-shadow: 0 0 15px rgba(255,60,120,0.4);
-    transform: translateY(80px);
+    left: 8%;
+    bottom: 12px;
+    box-shadow: 0 12px 30px rgba(255,60,120,0.14);
+    transform: translateY(120px) rotateX(12deg);
     opacity: 0;
-    transition: 0.8s ease;
+    z-index: 7;
+    /* we'll animate via keyframes when .open */
 }
 
-/* saat keluar */
-.paper-up {
-    transform: translateY(-20px);
-    opacity: 1;
+/* keyframes for paper - smooth lift with small overshoot */
+@keyframes paperLift {
+    0% { transform: translateY(120px) rotateX(12deg); opacity: 0; }
+    50% { transform: translateY(-30px) rotateX(4deg); opacity: 1; }
+    75% { transform: translateY(-10px) rotateX(0deg); }
+    100% { transform: translateY(-18px) rotateX(0deg); }
 }
 
-/* ——— BUTTON AREA —————————————— */
+/* when envelope is open, run animation */
+.envelope-container.open .letter-paper {
+    animation: paperLift 0.9s cubic-bezier(.22,.9,.35,1) forwards;
+}
+
+/* inner content area for the revealed letter (invisible until page switch) */
+.letter-inside {
+    padding: 16px;
+    color: #c22a5a;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ——— BUTTONS —————————————— */
 .btn-wrap {
     position: relative;
     width: 100%;
+    max-width: 420px;
     height: 260px;
-    margin-top: 20px;
+    margin: 6px auto 0;
 }
-
 .btn {
-    padding: 12px 25px;
+    padding: 12px 24px;
     border: none;
     background: #ff3e7f;
     color: white;
     border-radius: 12px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
-    transition: 0.15s;
+    transition: transform .15s;
+    box-shadow: 0 8px 18px rgba(255,60,120,0.18);
 }
+.btn:hover { transform: translateY(-3px); }
 
-.btn:hover { transform: scale(1.04); }
+#yesBtn { position: absolute; left: 26%; top: 110px; }
+#noBtn  { position: absolute; left: 56%; top: 110px; }
 
-#yesBtn { position: absolute; left: 30%; top: 120px; }
-#noBtn  { position: absolute; left: 55%; top: 120px; }
-
-/* ——— HALAMAN ISI SURAT —————————————— */
+/* ——— LETTER PAGE —————————————— */
+.letter-page {
+    display: none;
+    padding-top: 6px;
+}
+.photos {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
 .photos img {
-    width: 260px;
-    border-radius: 20px;
-    margin: 10px;
-    box-shadow: 0 0 20px rgba(255,100,150,0.6);
+    width: 220px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(255,80,130,0.15);
 }
 
+/* love letter block */
 .love-letter {
-    width: 80%;
-    max-width: 480px;
-    margin: 30px auto;
-    padding: 25px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255,100,150,0.6);
-    color: #d6336c;
+    width: 86%;
+    max-width: 640px;
+    margin: 22px auto;
+    padding: 20px 22px;
+    background: linear-gradient(180deg,#fffafc,#fff0f6);
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(255,80,130,0.08);
+    color: #c22a5a;
     font-size: 18px;
     line-height: 1.7;
 }
 
-/* ——— DEKORASI —————————————— */
+/* ——— DECORATIONS —————————————— */
 .sparkle {
     position: fixed;
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     background: white;
     border-radius: 50%;
-    animation: sparkle 2s infinite ease-in-out;
-    opacity: 0.7;
+    animation: sparkle 2.2s infinite ease-in-out;
+    opacity: 0.9;
+    z-index: 2;
 }
 @keyframes sparkle {
-    0% {transform:scale(0.2);opacity:0.4}
-    50%{transform:scale(1.2);opacity:1}
-    100%{transform:scale(0.2);opacity:0.4}
+    0% { transform: scale(0.3); opacity: 0.3; }
+    50%{ transform: scale(1.4); opacity: 1; }
+    100%{ transform: scale(0.3); opacity: 0.3; }
 }
 
 .heart {
     position: fixed;
     color: #ff4d6d;
-    animation: fall 4s linear infinite;
+    font-size: 20px;
+    animation: fall 4.2s linear infinite;
+    z-index: 1;
 }
 @keyframes fall {
-    0%{transform:translateY(-10vh);opacity:1}
-    100%{transform:translateY(110vh);opacity:0}
+    0%{ transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100%{ transform: translateY(110vh) rotate(25deg); opacity: 0; }
 }
 
+/* marquee (teks berjalan) */
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-top: 1px dashed rgba(255,70,120,0.07);
+    border-bottom: 1px dashed rgba(255,70,120,0.07);
+    padding: 8px 0;
+    margin-top: 16px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+}
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marqueeAnim 18s linear infinite;
+    color: #ff2f6d;
+    font-weight: 600;
+}
+@keyframes marqueeAnim {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* responsive */
+@media (max-width:420px){
+    .envelope-container { width: 300px; height: 220px; }
+    .envelope-flap { border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 110px solid #ff5c8a; }
+    .letter-paper { width: 86%; left: 7%; }
+    .photos img { width: 160px; }
+    h1 { font-size: 28px; }
+}
 </style>
 </head>
 <body>
 
-<div class="gradient-bg"></div>
-
-<!-- ——— COVER PAGE —————————————— -->
-<div id="coverPage" class="page">
-
+<div class="page" id="coverPage" aria-live="polite">
     <h1>Happy Mensiversary ke-28 ❤️</h1>
     <div class="ask-text">Mau lihat isi suratnya? 💌</div>
 
-    <!-- ENVELOPE ANIMATION -->
-    <div class="envelope-container">
-        <div class="envelope-flap" id="flap"></div>
-        <div class="envelope-body"></div>
-        <div class="letter-paper" id="paper"></div>
+    <!-- envelope -->
+    <div class="envelope-container" id="env">
+        <div class="envelope-flap" id="flap" aria-hidden="true"></div>
+        <div class="envelope-body" aria-hidden="true"></div>
+
+        <!-- the paper that will rise up -->
+        <div class="letter-paper" id="paper" aria-hidden="true">
+            <!-- content preview (optional small lines) -->
+            <div style="padding:12px;">
+                <div style="height:10px;width:80%;background:#ffe8f0;border-radius:6px;margin:6px 0;"></div>
+                <div style="height:10px;width:60%;background:#ffe8f0;border-radius:6px;margin:6px 0;"></div>
+                <div style="height:10px;width:70%;background:#ffe8f0;border-radius:6px;margin:6px 0;"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- BUTTONS -->
-    <div class="btn-wrap" id="btnWrap">
-        <button class="btn" id="yesBtn" onclick="animateEnvelope()">Iya ❤️</button>
+    <!-- buttons area -->
+    <div class="btn-wrap">
+        <button class="btn" id="yesBtn" onclick="openEnvelope()">Iya ❤️</button>
         <button class="btn" id="noBtn">Tidak 🙅</button>
     </div>
+
+    <!-- marquee / running text -->
+    <div class="marquee" aria-hidden="true"><span>Selamat mensiversary ke-28 • Aku sayang kamu • Terima kasih sudah selalu ada • Cinta kita selamanya •</span></div>
 </div>
 
-<!-- ——— LETTER PAGE —————————————— -->
-<div id="letterPage" class="page" style="display: none;">
+<!-- letter page (hidden until opened) -->
+<div class="letter-page" id="letterPage" aria-hidden="true">
     <h1>Untuk Kamu yang Aku Cintai ❤️</h1>
 
-    <div class="photos">
-        <img src="foto-kita.jpg">
-        <img src="foto-kita2.jpg">
+    <div class="photos" aria-hidden="true">
+        <!-- GANTI LINK DENGAN FOTO KALIAN -->
+        <img src="foto-kita.jpg" alt="Foto kita 1">
+        <img src="foto-kita2.jpg" alt="Foto kita 2">
     </div>
 
-    <div class="love-letter">
-        Sayangku…<br>
-        Hari ini adalah Mensiversary kita yang ke-28.<br>
-        Terima kasih karena kamu tetap memilihku setiap hari.<br>
-        Aku sayang kamu. Selalu. ❤️
+    <div class="love-letter" role="article">
+        Sayangku…<br><br>
+        Hari ini Mensiversary kita yang ke-28. Terima kasih sudah memilih aku setiap hari,  
+        untuk tawa, pelukan, lelah dan bahagia. Kamu rumah terbaik di hatiku.  
+        Semoga kita selalu saling merawat cinta ini, tumbuh dan menjadi lebih baik.  
+        Aku mencintaimu — sekarang, esok, dan selamanya. ❤️
     </div>
 </div>
 
-<!-- MUSIC -->
-<audio id="bgm" src="lagu.mp3" loop></audio>
+<!-- audio (autoplay policy: play on first interaction or via script) -->
+<audio id="bgm" loop preload="auto">
+    <!-- GANTI LAGU.Dengan link mp3 bebas hak cipta atau file lokal -->
+    <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+<audio id="popup" preload="auto">
+    <source src="popup.mp3" type="audio/mpeg">
+</audio>
+
+<!-- decorative sparkles and hearts appended via script -->
 
 <script>
-/* ——— PLAY MUSIC ON FIRST INTERACTION —————————————— */
-document.addEventListener('click', function once() {
-    let m = document.getElementById("bgm");
-    if (m.paused) m.play().catch(()=>{});
-    document.removeEventListener("click", once);
+/* -----------------------
+   Interaction & Animations
+   ----------------------- */
+const env = document.getElementById('env');
+const flap = document.getElementById('flap');
+const paper = document.getElementById('paper');
+const coverPage = document.getElementById('coverPage');
+const letterPage = document.getElementById('letterPage');
+const bgm = document.getElementById('bgm');
+const popup = document.getElementById('popup');
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+
+/* Try to autoplay muted then unmute (best-effort) */
+window.addEventListener('load', () => {
+    try {
+        bgm.volume = 0;
+        const p = bgm.play();
+        if (p && p.then) {
+            p.then(()=> {
+                setTimeout(()=> bgm.volume = 0.9, 900);
+            }).catch(()=> {
+                // blocked: will play after user click (openEnvelope)
+            });
+        }
+    } catch(e){}
 });
 
-/* ——— ANIMASI SURAT TERBUKA —————————————— */
-function animateEnvelope(){
-    let flap = document.getElementById("flap");
-    let paper = document.getElementById("paper");
+/* open envelope: flap flip + paper lift */
+function openEnvelope() {
+    // add open class to envelope container
+    env.classList.add('open');
 
-    flap.classList.add("flap-open");
+    // play small popup sound and ensure bgm playing
+    try { popup.currentTime = 0; popup.play(); } catch(e){}
+    try { bgm.play(); } catch(e){}
 
-    setTimeout(()=>{
-        paper.classList.add("paper-up");
-    }, 600);
-
-    /* setelah animasi selesai → ke halaman surat */
-    setTimeout(()=>{
-        document.getElementById("coverPage").style.display = "none";
-        document.getElementById("letterPage").style.display = "block";
-    }, 1600);
+    // after short delay, show the letter page (keeps dramatic timing)
+    setTimeout(()=> {
+        // hide cover, show letter page
+        coverPage.style.display = 'none';
+        letterPage.style.display = 'block';
+        // accessibility
+        coverPage.setAttribute('aria-hidden','true');
+        letterPage.setAttribute('aria-hidden','false');
+    }, 950); // timing tuned with animations
 }
 
-/* ——— TOMBOL TIDAK —————————————— */
+/* no button silly move */
 (function(){
-    const noBtn = document.getElementById('noBtn');
-    const btnWrap = document.getElementById('btnWrap');
-    const yesBtn = document.getElementById('yesBtn');
-
-    function moveNoBtn(){
-        const wrap = btnWrap.getBoundingClientRect();
-        const yes = yesBtn.getBoundingClientRect();
-        const w = noBtn.offsetWidth;
-        const h = noBtn.offsetHeight;
-
-        let left, top, overlap, tries=0;
-
-        const maxLeft = wrap.width - w;
-        const maxTop = wrap.height - h;
-
-        do {
-            left = Math.random() * maxLeft;
-            top  = Math.random() * maxTop;
-
-            const cand = {
-                left: wrap.left + left,
-                right: wrap.left + left + w,
-                top: wrap.top + top,
-                bottom: wrap.top + top + h
-            };
-
-            overlap = !(cand.right < yes.left ||
-                        cand.left > yes.right ||
-                        cand.bottom < yes.top ||
-                        cand.top > yes.bottom);
-
-            tries++;
-        } while(overlap && tries < 20);
-
-        noBtn.style.left = left+"px";
-        noBtn.style.top  = top+"px";
+    const wrap = document.querySelector('.btn-wrap');
+    function moveNo() {
+        const r = wrap.getBoundingClientRect();
+        const w = noBtn.offsetWidth, h = noBtn.offsetHeight;
+        const maxLeft = r.width - w - 10;
+        const maxTop = r.height - h - 10;
+        let left = Math.random()*maxLeft;
+        let top = Math.random()*maxTop;
+        noBtn.style.left = left + 'px';
+        noBtn.style.top = top + 'px';
     }
-
-    noBtn.addEventListener("mouseenter", moveNoBtn);
-    noBtn.addEventListener("touchstart", e => { e.preventDefault(); moveNoBtn(); });
-    noBtn.addEventListener("click", e => { e.preventDefault(); moveNoBtn(); });
+    noBtn.addEventListener('mouseenter', moveNo);
+    noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); moveNo(); });
+    noBtn.addEventListener('click', e=>{ e.preventDefault(); moveNo(); });
 })();
 
-/* ——— SPARKLES —————————————— */
-for(let i=0;i<30;i++){
-    let s=document.createElement("div");
-    s.className="sparkle";
-    s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
-    s.style.animationDelay=Math.random()*2+"s";
-    document.body.appendChild(s);
-}
+/* -----------------------
+   Decorative Sparkles
+   ----------------------- */
+(function createSparkles(){
+    for(let i=0;i<28;i++){
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        s.style.left = (Math.random()*100) + 'vw';
+        s.style.top = (Math.random()*100) + 'vh';
+        s.style.width = (4 + Math.random()*6) + 'px';
+        s.style.height = s.style.width;
+        s.style.animationDelay = (Math.random()*2) + 's';
+        document.body.appendChild(s);
+    }
+})();
 
-/* ——— HEART PARTICLES —————————————— */
-function makeHeart(){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(20+Math.random()*25)+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),4200);
-}
-setInterval(makeHeart,350);
+/* -----------------------
+   Heart Particles
+   ----------------------- */
+(function hearts(){
+    function makeHeart(){
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.innerHTML = '❤️';
+        h.style.left = Math.random()*100 + 'vw';
+        h.style.fontSize = (14 + Math.random()*28) + 'px';
+        h.style.animationDuration = (3.5 + Math.random()*2.5) + 's';
+        document.body.appendChild(h);
+        setTimeout(()=> h.remove(), 4200);
+    }
+    setInterval(makeHeart, 350);
+})();
 
-/* ——— CONFETTI —————————————— */
+/* -----------------------
+   Confetti (via CDN) - load once
+   ----------------------- */
 (function(){
-    let script=document.createElement("script");
-    script.src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1";
-    script.onload=()=>{
-        setInterval(()=>confetti({particleCount:60,spread:60,origin:{y:0}}),2200);
+    const script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1";
+    script.onload = ()=> {
+        // subtle confetti bursts every few seconds
+        setInterval(()=> confetti({ particleCount: 40, spread: 60, origin: { y: 0.1 }}), 2500);
     };
     document.body.appendChild(script);
 })();
 </script>
-
 </body>
 </html>
