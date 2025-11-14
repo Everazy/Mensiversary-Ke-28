@@ -1,278 +1,145 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Mensiversary ke-28 ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensiversary ke-28</title>
 
-<style>
-/* ——— BASIC STYLE —————————————— */
-body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    overflow-x: hidden;
-    background: #ffb7d5;
-}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffe6f2;
+            font-family: "Poppins", sans-serif;
+            overflow-x: hidden;
+        }
 
-.page { text-align: center; padding: 40px 20px; }
+        /* TEKS BERJALAN */
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .marquee-text {
+            display: inline-block;
+            font-size: 20px;
+            white-space: nowrap;
+            animation: scrolltext 15s linear infinite;
+            color: #d63384;
+            font-weight: bold;
+        }
+        @keyframes scrolltext {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
 
-.gradient-bg {
-    position: fixed;
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, #ff8fb1, #ffc8dd, #ffafcc);
-    z-index: -1;
-}
+        /* Sparkle effect */
+        .sparkle {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.8) 2px, transparent 3px);
+            background-size: 40px 40px;
+            animation: sparkleMove 4s linear infinite;
+            opacity: 0.7;
+        }
+        @keyframes sparkleMove {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
 
-h1 {
-    color: white;
-    font-size: 40px;
-    margin-top: 20px;
-    text-shadow: 0 0 10px #ff3e7f;
-}
+        /* SURAT FOTO DI HALAMAN AWAL */
+        .letter-image {
+            display: block;
+            width: 250px;
+            margin: 60px auto 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .letter-image:hover {
+            transform: scale(1.1);
+        }
 
-.ask-text {
-    font-size: 20px;
-    color: white;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-shadow: 0 0 8px #ff3e7f;
-}
-
-/* 🟦 CSS BARU – FOTO SURAT */
-.surat-img-box {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.surat-img {
-    width: 300px;
-    max-width: 80%;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255, 80, 140, 0.5);
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-/* ——— BUTTON AREA —————————————— */
-.btn-wrap {
-    position: relative;
-    width: 100%;
-    height: 260px;
-    margin-top: 20px;
-}
-
-.btn {
-    padding: 12px 25px;
-    border: none;
-    background: #ff3e7f;
-    color: white;
-    border-radius: 12px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.15s;
-}
-
-.btn:hover { transform: scale(1.04); }
-
-#yesBtn { position: absolute; left: 30%; top: 120px; }
-#noBtn  { position: absolute; left: 55%; top: 120px; }
-
-/* ——— HALAMAN ISI SURAT —————————————— */
-.photos img {
-    width: 260px;
-    border-radius: 20px;
-    margin: 10px;
-    box-shadow: 0 0 20px rgba(255,100,150,0.6);
-}
-
-.love-letter {
-    width: 80%;
-    max-width: 480px;
-    margin: 30px auto;
-    padding: 25px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255,100,150,0.6);
-    color: #d6336c;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-/* ——— DEKORASI —————————————— */
-.sparkle {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    animation: sparkle 2s infinite ease-in-out;
-    opacity: 0.7;
-}
-@keyframes sparkle {
-    0% {transform:scale(0.2);opacity:0.4}
-    50%{transform:scale(1.2);opacity:1}
-    100%{transform:scale(0.2);opacity:0.4}
-}
-
-.heart {
-    position: fixed;
-    color: #ff4d6d;
-    animation: fall 4s linear infinite;
-}
-@keyframes fall {
-    0%{transform:translateY(-10vh);opacity:1}
-    100%{transform:translateY(110vh);opacity:0}
-}
-
-</style>
+        /* Popup surat cinta */
+        #letterPopup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        .letter-box {
+            background: #fff;
+            width: 85%;
+            max-width: 450px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s ease;
+        }
+        .letter-box h2 {
+            text-align: center;
+            color: #d63384;
+        }
+        #closeLetter {
+            display: block;
+            margin: 15px auto 0;
+            padding: 10px 20px;
+            background: #d63384;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
 
-<div class="gradient-bg"></div>
+    <div class="sparkle"></div>
 
-<!-- ——— COVER PAGE —————————————— -->
-<div id="coverPage" class="page">
-
-    <h1>Happy Mensiversary ke-28 ❤️</h1>
-    <div class="ask-text">Mau lihat isi suratnya? 💌</div>
-
-    <!-- 🟩 TAMBAHAN BARU: FOTO SURAT -->
-    <div class="surat-img-box">
-        <img src="love-letter_1f48c.png" class="surat-img">
+    <!-- TEKS BERJALAN -->
+    <div class="marquee">
+        <div class="marquee-text">
+            Happy Mensiversary ke-28 Sayang ❤️ Semoga cinta kita selalu indah dan penuh kebahagiaan ✨
+        </div>
     </div>
 
-    <!-- BUTTONS -->
-    <div class="btn-wrap" id="btnWrap">
-        <button class="btn" id="yesBtn" onclick="animateEnvelope()">Iya ❤️</button>
-        <button class="btn" id="noBtn">Tidak 🙅</button>
+    <!-- FOTO SURAT DI HALAMAN AWAL -->
+    <img src="surat.png" class="letter-image" id="openLetter" alt="Surat Cinta">
+
+    <!-- POPUP SURAT CINTA -->
+    <div id="letterPopup">
+        <div class="letter-box">
+            <h2>Surat Cinta Untukmu ❤️</h2>
+
+            <!-- 📝 ISI SURAT CINTA → GANTI TEKS DI SINI -->
+            <p id="love-letter-text">
+                Tulis isi surat cintamu di sini...
+            </p>
+            <!-- 📝 AKHIR ISI SURAT -->
+
+            <button id="closeLetter">Tutup</button>
+        </div>
     </div>
-</div>
 
-<!-- ——— LETTER PAGE —————————————— -->
-<div id="letterPage" class="page" style="display: none;">
-    <h1>Untuk Kamu yang Aku Cintai ❤️</h1>
+    <script>
+        const openL = document.getElementById("openLetter");
+        const pop = document.getElementById("letterPopup");
+        const closeL = document.getElementById("closeLetter");
 
-    <!-- kamu bisa ganti dengan foto isi surat -->
-    <img src="isi-surat.jpg" style="width: 80%; border-radius: 20px; box-shadow: 0 0 20px rgba(255,90,140,0.5);">
-</div>
-
-<!-- MUSIC -->
-<audio id="bgm" src="lagu.mp3" loop></audio>
-
-<script>
-/* ——— PLAY MUSIC ON FIRST INTERACTION —————————————— */
-document.addEventListener('click', function once() {
-    let m = document.getElementById("bgm");
-    if (m.paused) m.play().catch(()=>{});
-    document.removeEventListener("click", once);
-});
-
-/* ——— ANIMASI TRANSISI KE ISI SURAT —————————————— */
-function animateEnvelope(){
-    const cover = document.getElementById("coverPage");
-    const letter = document.getElementById("letterPage");
-
-    // 🟩 Animasi getar sedikit sebelum pindah
-    cover.style.animation = "shake 0.4s ease";
-
-    setTimeout(()=>{
-        cover.style.opacity = "0";
-        setTimeout(()=>{
-            cover.style.display = "none";
-            letter.style.display = "block";
-            letter.style.opacity = "0";
-            setTimeout(()=> letter.style.opacity = "1", 50);
-        }, 400);
-    }, 300);
-}
-
-/* Getar halus */
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes shake {
-    0% {transform: translate(0,0)}
-    25% {transform: translate(4px,-4px)}
-    50% {transform: translate(-4px,4px)}
-    75% {transform: translate(4px,4px)}
-    100%{transform: translate(0,0)}
-}`;
-document.head.appendChild(style);
-
-/* ——— tombol tidak bergerak —————————————— */
-(function(){
-    const noBtn = document.getElementById('noBtn');
-    const btnWrap = document.getElementById('btnWrap');
-    const yesBtn = document.getElementById('yesBtn');
-
-    function moveNoBtn(){
-        const wrap = btnWrap.getBoundingClientRect();
-        const yes = yesBtn.getBoundingClientRect();
-        const w = noBtn.offsetWidth;
-        const h = noBtn.offsetHeight;
-
-        let left, top, overlap, tries=0;
-
-        const maxLeft = wrap.width - w;
-        const maxTop = wrap.height - h;
-
-        do {
-            left = Math.random() * maxLeft;
-            top  = Math.random() * maxTop;
-
-            const cand = {
-                left: wrap.left + left,
-                right: wrap.left + left + w,
-                top: wrap.top + top,
-                bottom: wrap.top + top + h
-            };
-
-            overlap = !(cand.right < yes.left ||
-                        cand.left > yes.right ||
-                        cand.bottom < yes.top ||
-                        cand.top > yes.bottom);
-
-            tries++;
-        } while(overlap && tries < 20);
-
-        noBtn.style.left = left+"px";
-        noBtn.style.top  = top+"px";
-    }
-
-    noBtn.addEventListener("mouseenter", moveNoBtn);
-    noBtn.addEventListener("touchstart", e => { e.preventDefault(); moveNoBtn(); });
-    noBtn.addEventListener("click", e => { e.preventDefault(); moveNoBtn(); });
-})();
-
-/* ——— SPARKLES —————————————— */
-for(let i=0;i<30;i++){
-    let s=document.createElement("div");
-    s.className="sparkle";
-    s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
-    s.style.animationDelay=Math.random()*2+"s";
-    document.body.appendChild(s);
-}
-
-/* ——— HEART PARTICLES —————————————— */
-function makeHeart(){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(20+Math.random()*25)+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),4200);
-}
-setInterval(makeHeart,350);
-
-</script>
+        openL.onclick = () => pop.style.display = "flex";
+        closeL.onclick = () => pop.style.display = "none";
+    </script>
 
 </body>
 </html>
