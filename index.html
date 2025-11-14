@@ -173,21 +173,25 @@ function openLetterHandler(e){
 yesBtn.addEventListener('click', openLetterHandler);
 yesBtn.addEventListener('touchstart', openLetterHandler);
 
-// No button — jump very far but keep inside viewport
-function moveNoFar(){
-    const rect = noBtn.getBoundingClientRect();
-    // random large jump
-    const jumpX = (Math.random()*800)-400; // -800 .. +800
-    const jumpY = (Math.random()*800)-400;  // -450 .. +450
-    // current computed transform - parse previous translate if any
-    // apply new translate
-    noBtn.style.transform = `translate(${jumpX}px, ${jumpY}px)`;
-    // small vibration on touch
-    if(navigator.vibrate) navigator.vibrate([30]);
+function moveNoFar() {
+    const btn = noBtn;
+
+    const btnW = btn.offsetWidth;
+    const btnH = btn.offsetHeight;
+
+    // batas aman agar tombol tidak keluar layar
+    const maxX = (window.innerWidth - btnW) / 2 - 40;
+    const maxY = (window.innerHeight - btnH) / 2 - 60;
+
+    // posisi acak tetap berada dalam batas
+    let newX = Math.random() * (maxX * 2) - maxX;
+    let newY = Math.random() * (maxY * 2) - maxY;
+
+    btn.style.transform = `translate(${newX}px, ${newY}px)`;
+
+    // getaran kecil di HP
+    if (navigator.vibrate) navigator.vibrate(35);
 }
-noBtn.addEventListener('mouseenter', moveNoFar);
-noBtn.addEventListener('click', moveNoFar);
-noBtn.addEventListener('touchstart', function(e){ e.preventDefault(); moveNoFar(); }, {passive:false});
 
 // send reply
 function sendReply(){
